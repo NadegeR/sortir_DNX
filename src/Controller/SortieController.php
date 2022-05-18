@@ -4,7 +4,11 @@ namespace App\Controller;
 
 use App\Entity\Sortie;
 use App\Form\SortieType;
+use App\Entity\Etat;
+use App\Repository\EtatRepository;
 use App\Repository\SortieRepository;
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -28,13 +32,20 @@ class SortieController extends AbstractController
     /**
      * @Route("/new", name="nouvelle-sortie", methods={"GET", "POST"})
      */
-    public function new(Request $request, SortieRepository $sortieRepository): Response
+    public function new(Request $request, SortieRepository $sortieRepository, EtatRepository $etatRepository): Response
     {
         $sortie = new Sortie();
+
         $form = $this->createForm(SortieType::class, $sortie);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            // on attribut l'etat de la sortie selon "Enregistrer" ou "Pulbier"
+            $etat = $form->get('publier')->isClicked() ?
+                $etatRepository->findBy(['libelle' => 'Ouverte'])
+                : $etatRepository->findBy(['libelle' => 'Créée']);
+            $sortie->setEtat($etat[0]);
+
             $sortieRepository->add($sortie, true);
 
             return $this->redirectToRoute('liste-sorties', [], Response::HTTP_SEE_OTHER);
@@ -65,6 +76,7 @@ class SortieController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
             $sortieRepository->add($sortie, true);
 
             return $this->redirectToRoute('liste-sorties', [], Response::HTTP_SEE_OTHER);
@@ -81,15 +93,12 @@ class SortieController extends AbstractController
      */
     public function delete(Request $request, Sortie $sortie, SortieRepository $sortieRepository): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$sortie->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $sortie->getId(), $request->request->get('_token'))) {
             $sortieRepository->remove($sortie, true);
         }
 
         return $this->redirectToRoute('liste-sorties', [], Response::HTTP_SEE_OTHER);
     }
-
-
-
 
 
 }

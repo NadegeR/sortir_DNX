@@ -1,14 +1,10 @@
 {% extends 'base.html.twig' %}
 
 
-
-
 {% block title %}Sorties |{{parent()}}{% endblock %}
 
 
-
 {% block body %}
-
 
     <h1>Sortie index</h1>
 
@@ -16,10 +12,11 @@
         <thead>
             <tr>
                 <th>Nom</th>
-                <th>DateHeureDebut</th>
+                <th>Date de la sortie</th>
                 <th>Duree</th>
-                <th>DateLimiteInscription</th>
-                <th>NbIscriptionsMax</th>
+                <th>Clôture</th>
+                <th>Inscrits/Places</th>
+                <th>Etat</th>
                 <th>InfosSortie</th>
                 <th>actions</th>
             </tr>
@@ -30,8 +27,9 @@
                 <td>{{ sortie.nom }}</td>
                 <td>{{ sortie.dateHeureDebut ? sortie.dateHeureDebut|date('d-m-Y H:i') : '' }}</td>
                 <td>{{ sortie.duree ? sortie.duree|date('H:i') : '' }}</td>
-                <td>{{ sortie.dateLimiteInscription ? sortie.dateLimiteInscription|date('d-m-Y H:i') : '' }}</td>
+                <td>{{ sortie.dateLimiteInscription ? sortie.dateLimiteInscription|date('d-m-Y') : '' }}</td>
                 <td>{{ sortie.nbIscriptionsMax }}</td>
+                <td>{{ sortie.etat.libelle}}</td>
                 <td>{{ sortie.infosSortie }}</td>
                 <td>
                     <a href="{{ path('details-sortie', {'id': sortie.id}) }}">Détails</a>

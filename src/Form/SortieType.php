@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Sortie;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -18,7 +19,13 @@ class SortieType extends AbstractType
             ->add('dateLimiteInscription')
             ->add('nbIscriptionsMax')
             ->add('infosSortie')
-        ;
+            ->add('enregistrer', SubmitType::class, ['label' => 'Enregistrer', 'attr' => [
+                    'class' => 'btn btn-outline-primary col-lg-1']
+            ])
+            ->add('publier', SubmitType::class, ['label' => 'Publier', 'attr' => [
+                    'class' => 'btn btn-outline-success col-lg-auto']
+                ])
+            ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void
