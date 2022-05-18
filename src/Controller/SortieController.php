@@ -16,7 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class SortieController extends AbstractController
 {
     /**
-     * @Route("/", name="app_sortie_index", methods={"GET"})
+     * @Route("", name="liste-sorties", methods={"GET"})
      */
     public function index(SortieRepository $sortieRepository): Response
     {
@@ -26,7 +26,7 @@ class SortieController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="app_sortie_new", methods={"GET", "POST"})
+     * @Route("/new", name="nouvelle-sortie", methods={"GET", "POST"})
      */
     public function new(Request $request, SortieRepository $sortieRepository): Response
     {
@@ -37,7 +37,7 @@ class SortieController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $sortieRepository->add($sortie, true);
 
-            return $this->redirectToRoute('app_sortie_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('liste-sorties', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('sortie/new.html.twig', [
@@ -47,7 +47,7 @@ class SortieController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="app_sortie_show", methods={"GET"})
+     * @Route("/details/{id}", name="details-sortie", methods={"GET"})
      */
     public function show(Sortie $sortie): Response
     {
@@ -57,7 +57,7 @@ class SortieController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="app_sortie_edit", methods={"GET", "POST"})
+     * @Route("/{id}/edit", name="editer-sortie", methods={"GET", "POST"})
      */
     public function edit(Request $request, Sortie $sortie, SortieRepository $sortieRepository): Response
     {
@@ -67,7 +67,7 @@ class SortieController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $sortieRepository->add($sortie, true);
 
-            return $this->redirectToRoute('app_sortie_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('liste-sorties', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('sortie/edit.html.twig', [
@@ -77,7 +77,7 @@ class SortieController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="app_sortie_delete", methods={"POST"})
+     * @Route("/{id}", name="effacer-sortie", methods={"GET", "POST"})
      */
     public function delete(Request $request, Sortie $sortie, SortieRepository $sortieRepository): Response
     {
@@ -85,6 +85,11 @@ class SortieController extends AbstractController
             $sortieRepository->remove($sortie, true);
         }
 
-        return $this->redirectToRoute('app_sortie_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('liste-sorties', [], Response::HTTP_SEE_OTHER);
     }
+
+
+
+
+
 }

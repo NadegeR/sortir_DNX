@@ -1,13 +1,13 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Sortie{% endblock %}
+{% block title %}Modifier une Sortie |{{parent()}}{% endblock %}
 
 {% block body %}
-    <h1>Edit Sortie</h1>
+    <h1>Modifier une Sortie</h1>
 
-    {{ include('sortie/_form.html.twig', {'button_label': 'Update'}) }}
+    {{ include('sortie/_form.html.twig', {'button_label': 'Enregistrer'}) }}
 
-    <a href="{{ path('app_sortie_index') }}">back to list</a>
+    <a href="{{ path('liste-sorties') }}"><button>Retour à la liste des sorties</button></a>
 
     {{ include('sortie/_delete_form.html.twig') }}
 {% endblock %}
