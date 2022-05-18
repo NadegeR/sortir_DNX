@@ -19,7 +19,7 @@ class SortieType extends AbstractType
     {
         $builder
             ->add('nom', TextType::class, ['label'=> 'Nom'])
-            ->add('dateHeureDebut', DateTimeType::class, ['html5'=> true,'widget'=> 'single_text'] )
+            ->add('dateHeureDebut', DateTimeType::class, ['label'=> 'Date et heure de debut','html5'=> true,'widget'=> 'single_text'] )
             ->add('duree', TimeType::class, ['html5'=> true,'widget'=> 'single_text'])
             ->add('dateLimiteInscription',DateTimeType::class, ['html5'=> true,'widget'=> 'single_text'])
             ->add('nbIscriptionsMax',IntegerType::class, ['attr'=>['min'=>0], 'label'=> 'Places disponibles'])
