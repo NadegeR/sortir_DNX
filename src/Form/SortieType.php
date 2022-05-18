@@ -34,6 +34,7 @@ class SortieType extends AbstractType
                 'choice_label' => 'nom',
                 'placeholder' => 'Choisir un lieu...'
             ])
+            ->add('campus', EntityType::class)
             ->add('publier', SubmitType::class, ['label' => 'Publier', 'attr' => [
                     'class' => 'btn btn-outline-success col-lg-auto']
                 ])
