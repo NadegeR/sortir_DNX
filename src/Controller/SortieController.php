@@ -40,6 +40,7 @@ class SortieController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
             // on attribut l'etat de la sortie selon "Enregistrer" ou "Pulbier"
             $etat = $form->get('publier')->isClicked() ?
                 $etatRepository->findBy(['libelle' => 'Ouverte'])
@@ -70,12 +71,16 @@ class SortieController extends AbstractController
     /**
      * @Route("/{id}/edit", name="editer-sortie", methods={"GET", "POST"})
      */
-    public function edit(Request $request, Sortie $sortie, SortieRepository $sortieRepository): Response
+    public function edit(Request $request, Sortie $sortie, SortieRepository $sortieRepository, EtatRepository $etatRepository): Response
     {
         $form = $this->createForm(SortieType::class, $sortie);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $etat = $form->get('publier')->isClicked() ?
+                $etatRepository->findBy(['libelle' => 'Ouverte'])
+                : $etatRepository->findBy(['libelle' => 'Créée']);
+            $sortie->setEtat($etat[0]);
 
             $sortieRepository->add($sortie, true);
 
