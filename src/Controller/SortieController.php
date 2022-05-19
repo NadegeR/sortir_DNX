@@ -40,12 +40,13 @@ class SortieController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $user = $this->getUser();
 
             // on attribut l'etat de la sortie selon "Enregistrer" ou "Pulbier"
             $etat = $form->get('publier')->isClicked() ?
                 $etatRepository->findBy(['libelle' => 'Ouverte'])
                 : $etatRepository->findBy(['libelle' => 'Créée']);
-            $sortie->setEtat($etat[0]);
+            $sortie->setEtat($etat[0])->setOrganisateur($user);
 
             $sortieRepository->add($sortie, true);
 
