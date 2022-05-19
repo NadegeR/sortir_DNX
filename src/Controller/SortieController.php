@@ -50,7 +50,7 @@ class SortieController extends AbstractController
 
             $sortieRepository->add($sortie, true);
 
-            return $this->redirectToRoute('liste-sorties', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('details-sortie', ['id'=>$sortie->getId()], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('sortie/new.html.twig', [
@@ -85,7 +85,7 @@ class SortieController extends AbstractController
 
             $sortieRepository->add($sortie, true);
 
-            return $this->redirectToRoute('liste-sorties', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('details-sortie', ['id'=>$sortie->getId()], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('sortie/edit.html.twig', [
