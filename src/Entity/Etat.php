@@ -29,10 +29,6 @@ class Etat
      */
     private $sorties;
 
-    /**
-     * @ORM\Column(type="string", length=20, nullable=true)
-     */
-    private $test;
 
     public function __construct()
     {
@@ -86,15 +82,4 @@ class Etat
         return $this;
     }
 
-    public function getTest(): ?string
-    {
-        return $this->test;
-    }
-
-    public function setTest(?string $test): self
-    {
-        $this->test = $test;
-
-        return $this;
-    }
 }

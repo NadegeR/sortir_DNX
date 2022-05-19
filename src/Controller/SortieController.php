@@ -44,9 +44,9 @@ class SortieController extends AbstractController
 
             // on attribut l'etat de la sortie selon "Enregistrer" ou "Pulbier"
             $etat = $form->get('publier')->isClicked() ?
-                $etatRepository->findBy(['libelle' => 'Ouverte'])
-                : $etatRepository->findBy(['libelle' => 'Créée']);
-            $sortie->setEtat($etat[0])->setOrganisateur($user);
+                $etatRepository->find(2)
+                : $etatRepository->find(1);
+            $sortie->setEtat($etat)->setOrganisateur($user);
 
             $sortieRepository->add($sortie, true);
 
@@ -70,7 +70,7 @@ class SortieController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="editer-sortie", methods={"GET", "POST"})
+     * @Route("org/{id}/edit", name="editer-sortie", methods={"GET", "POST"})
      */
     public function edit(Request $request, Sortie $sortie, SortieRepository $sortieRepository, EtatRepository $etatRepository): Response
     {
@@ -79,9 +79,9 @@ class SortieController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $etat = $form->get('publier')->isClicked() ?
-                $etatRepository->findBy(['libelle' => 'Ouverte'])
-                : $etatRepository->findBy(['libelle' => 'Créée']);
-            $sortie->setEtat($etat[0]);
+                $etatRepository->find(2)
+                : $etatRepository->find(1);
+            $sortie->setEtat($etat);
 
             $sortieRepository->add($sortie, true);
 
@@ -95,7 +95,7 @@ class SortieController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="effacer-sortie", methods={"GET", "POST"})
+     * @Route("org/{id}", name="effacer-sortie", methods={"GET", "POST"})
      */
     public function delete(Request $request, Sortie $sortie, SortieRepository $sortieRepository): Response
     {
