@@ -49,12 +49,11 @@ class Sortie
      */
     private $infosSortie;
 
-
-    public function __construct()
-    {
-        $this->etat = new ArrayCollection();
-    }
-
+    /**
+     * @ORM\ManyToOne(targetEntity=Etat::class, inversedBy="sorties")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $etat;
 
 
     public function getId(): ?int
@@ -134,32 +133,14 @@ class Sortie
         return $this;
     }
 
-    /**
-     * @return Collection<int, Etat>
-     */
-    public function getEtat(): Collection
+    public function getEtat(): ?Etat
     {
         return $this->etat;
     }
 
-    public function addEtat(Etat $etat): self
+    public function setEtat(?Etat $etat): self
     {
-        if (!$this->etat->contains($etat)) {
-            $this->etat[] = $etat;
-            $etat->setSortie($this);
-        }
-
-        return $this;
-    }
-
-    public function removeEtat(Etat $etat): self
-    {
-        if ($this->etat->removeElement($etat)) {
-            // set the owning side to null (unless already changed)
-            if ($etat->getSortie() === $this) {
-                $etat->setSortie(null);
-            }
-        }
+        $this->etat = $etat;
 
         return $this;
     }
