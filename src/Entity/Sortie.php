@@ -49,10 +49,6 @@ class Sortie
      */
     private $infosSortie;
 
-    /**
-     * @ORM\OneToMany(targetEntity=Etat::class, mappedBy="sortie", orphanRemoval=true)
-     */
-    private $etat;
 
     public function __construct()
     {
