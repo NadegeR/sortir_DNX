@@ -30,17 +30,17 @@ class SortieType extends AbstractType
                 'choice_label' => 'nom',
                 'placeholder' => 'Choisir un lieu...'
             ])
-            ->add('siteOrganisateur', EntityType::class, ['label'=> 'Campus',
-                'class' => 'App\Entity\Campus',
-                'choice_label' => 'nom',
-                'placeholder' => 'Choisir un campus...'
-            ])
-            ->add('enregistrer', SubmitType::class, ['label' => 'Enregistrer', 'attr' => [
-                'class' => 'btn btn-outline-primary col-lg-1']
-            ])
-            ->add('publier', SubmitType::class, ['label' => 'Publier', 'attr' => [
-                    'class' => 'btn btn-outline-success col-lg-auto']
-                ])
+//            ->add('siteOrganisateur', EntityType::class, ['label'=> 'Campus',
+//                'class' => 'App\Entity\Campus',
+//                'choice_label' => 'nom',
+//                'placeholder' => 'Choisir un campus...'
+//            ])
+//            ->add('enregistrer', SubmitType::class, ['label' => 'Enregistrer', 'attr' => [
+//                'class' => 'btn btn-outline-primary col-lg-1']
+//            ])
+//            ->add('publier', SubmitType::class, ['label' => 'Publier', 'attr' => [
+//                    'class' => 'btn btn-outline-success col-lg-auto']
+//                ])
             ;
     }
 

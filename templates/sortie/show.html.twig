@@ -31,6 +31,32 @@
                 <th>InfosSortie</th>
                 <td>{{ sortie.infosSortie }}</td>
             </tr>
+            <tr>
+                <th>Campus</th>
+                <td>{{ sortie.siteOrganisateur.nom }}</td>
+            </tr>
+            <tr>
+                <th>Lieu</th>
+                <td>{{ sortie.lieu.nom }}</td>
+            </tr>
+            <tr>
+                <th>Rue</th>
+                <td>{{ sortie.lieu.rue }}</td>
+            </tr>
+            <tr>
+                <th>Code Postal</th>
+                <td>{{ sortie.lieu.ville.codePostal }}</td>
+            </tr>
+            {% if sortie.lieu.latitude and sortie.lieu.longitude is defined %}
+            <tr>
+                <th>latitude</th>
+                <td>{{ sortie.lieu.latitude }}</td>
+            </tr>
+            <tr>
+                <th>longitude</th>
+                <td>{{ sortie.lieu.longitude }}</td>
+            </tr>
+        {% endif %}
         </tbody>
     </table>
 

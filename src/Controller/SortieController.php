@@ -41,16 +41,28 @@ class SortieController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $user = $this->getUser();
+            $campus= $user->getCampus();
 
-            // on attribut l'etat de la sortie selon "Enregistrer" ou "Pulbier"
-            $etat = $form->get('publier')->isClicked() ?
-                $etatRepository->find(2)
-                : $etatRepository->find(1);
-            $sortie->setEtat($etat)->setOrganisateur($user);
+            if ($request->get('enregistrer')) {
+                $etat=$etatRepository->find(1);
+            }
+           else {$sortie->setEtat($etatRepository->find(2));
+            }
+
+            $sortie->setOrganisateurs($user);
+
+            $sortie->setSiteOrganisateur($campus);
+
+
+//            // on attribut l'etat de la sortie selon "Enregistrer" ou "Pulbier"
+//            $etat = $form->get('publier')->isClicked() ?
+//                $etatRepository->find(2)
+//                : $etatRepository->find(1);
+//            $sortie->setEtat($etat)->setOrganisateur($user);
 
             $sortieRepository->add($sortie, true);
 
-            return $this->redirectToRoute('details-sortie', ['id'=>$sortie->getId()], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('details-sortie', ['id' => $sortie->getId()], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('sortie/new.html.twig', [
@@ -78,14 +90,22 @@ class SortieController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $etat = $form->get('publier')->isClicked() ?
-                $etatRepository->find(2)
-                : $etatRepository->find(1);
-            $sortie->setEtat($etat);
+            // au clic sur le bouton "enregistrer
+            if ($request->get('enregistrer')) {
+                $sortie->setEtat($etatRepository->find(1));
+            }
+            if ($request->get('publier')) {
+                $sortie->setEtat($etatRepository->find(2));
+            }
+
+//                $etat = $form->get('publier')->isClicked() ?
+//                $etatRepository->find(2)
+//                : $etatRepository->find(1);
+//            $sortie->setEtat($etat);
 
             $sortieRepository->add($sortie, true);
 
-            return $this->redirectToRoute('details-sortie', ['id'=>$sortie->getId()], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('details-sortie', ['id' => $sortie->getId()], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('sortie/edit.html.twig', [

@@ -30,7 +30,7 @@
                 <td>{{ sortie.dateLimiteInscription ? sortie.dateLimiteInscription|date('d-m-Y') : '' }}</td>
                 <td>{{ sortie.nbIscriptionsMax }}</td>
                 <td>{{ sortie.etat.libelle}}</td>
-                <td>{{ sortie.organisateur.prenom }}</td>
+                <td>{{ sortie.organisateurs.prenom }}</td>
                 <td>
                     <a href="{{ path('details-sortie', {'id': sortie.id}) }}">Détails</a>
                     <a href="{{ path('editer-sortie', {'id': sortie.id}) }}">Modifier</a>
