@@ -39,15 +39,6 @@ class Lieu
      */
     private $longitude;
 
-    /**
-     * @ORM\OneToMany(targetEntity=Ville::class, mappedBy="lieux")
-     */
-    private $ville;
-
-    /**
-     * @ORM\OneToMany(targetEntity=Sortie::class, mappedBy="lieu")
-     */
-    private $sorties;
 
     public function __construct()
     {
@@ -108,63 +99,5 @@ class Lieu
         return $this;
     }
 
-    /**
-     * @return Collection<int, Ville>
-     */
-    public function getVille(): Collection
-    {
-        return $this->ville;
-    }
 
-    public function addVille(Ville $ville): self
-    {
-        if (!$this->ville->contains($ville)) {
-            $this->ville[] = $ville;
-            $ville->setLieux($this);
-        }
-
-        return $this;
-    }
-
-    public function removeVille(Ville $ville): self
-    {
-        if ($this->ville->removeElement($ville)) {
-            // set the owning side to null (unless already changed)
-            if ($ville->getLieux() === $this) {
-                $ville->setLieux(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Sortie>
-     */
-    public function getSorties(): Collection
-    {
-        return $this->sorties;
-    }
-
-    public function addSorty(Sortie $sorty): self
-    {
-        if (!$this->sorties->contains($sorty)) {
-            $this->sorties[] = $sorty;
-            $sorty->setLieu($this);
-        }
-
-        return $this;
-    }
-
-    public function removeSorty(Sortie $sorty): self
-    {
-        if ($this->sorties->removeElement($sorty)) {
-            // set the owning side to null (unless already changed)
-            if ($sorty->getLieu() === $this) {
-                $sorty->setLieu(null);
-            }
-        }
-
-        return $this;
-    }
 }

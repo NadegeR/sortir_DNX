@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\SortieRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -48,28 +50,16 @@ class Sortie
     private $infosSortie;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Etat::class, inversedBy="sorties")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\OneToMany(targetEntity=Etat::class, mappedBy="sortie", orphanRemoval=true)
      */
     private $etat;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Lieu::class, inversedBy="sorties")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $lieu;
+    public function __construct()
+    {
+        $this->etat = new ArrayCollection();
+    }
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Campus::class, inversedBy="sortieOrganiseePar")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $siteOrganisateur;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="organisateurSorties")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $organisateur;
 
     public function getId(): ?int
     {
@@ -148,51 +138,35 @@ class Sortie
         return $this;
     }
 
-    public function getEtat(): ?Etat
+    /**
+     * @return Collection<int, Etat>
+     */
+    public function getEtat(): Collection
     {
         return $this->etat;
     }
 
-    public function setEtat(?Etat $etat): self
+    public function addEtat(Etat $etat): self
     {
-        $this->etat = $etat;
+        if (!$this->etat->contains($etat)) {
+            $this->etat[] = $etat;
+            $etat->setSortie($this);
+        }
 
         return $this;
     }
 
-    public function getLieu(): ?Lieu
+    public function removeEtat(Etat $etat): self
     {
-        return $this->lieu;
-    }
-
-    public function setLieu(?Lieu $lieu): self
-    {
-        $this->lieu = $lieu;
+        if ($this->etat->removeElement($etat)) {
+            // set the owning side to null (unless already changed)
+            if ($etat->getSortie() === $this) {
+                $etat->setSortie(null);
+            }
+        }
 
         return $this;
     }
 
-    public function getSiteOrganisateur(): ?Campus
-    {
-        return $this->siteOrganisateur;
-    }
 
-    public function setSiteOrganisateur(?Campus $siteOrganisateur): self
-    {
-        $this->siteOrganisateur = $siteOrganisateur;
-
-        return $this;
-    }
-
-    public function getOrganisateur(): ?User
-    {
-        return $this->organisateur;
-    }
-
-    public function setOrganisateur(?User $organisateur): self
-    {
-        $this->organisateur = $organisateur;
-
-        return $this;
-    }
 }

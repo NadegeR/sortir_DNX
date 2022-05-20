@@ -25,9 +25,10 @@ class Etat
     private $libelle;
 
     /**
-     * @ORM\OneToMany(targetEntity=Sortie::class, mappedBy="etat")
+     * @ORM\ManyToOne(targetEntity=Sortie::class, inversedBy="etat")
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $sorties;
+    private $sortie;
 
 
     public function __construct()
@@ -52,34 +53,18 @@ class Etat
         return $this;
     }
 
-    /**
-     * @return Collection<int, Sortie>
-     */
-    public function getSorties(): Collection
+    public function getSortie(): ?Sortie
     {
-        return $this->sorties;
+        return $this->sortie;
     }
 
-    public function addSorty(Sortie $sorty): self
+    public function setSortie(?Sortie $sortie): self
     {
-        if (!$this->sorties->contains($sorty)) {
-            $this->sorties[] = $sorty;
-            $sorty->setEtat($this);
-        }
+        $this->sortie = $sortie;
 
         return $this;
     }
 
-    public function removeSorty(Sortie $sorty): self
-    {
-        if ($this->sorties->removeElement($sorty)) {
-            // set the owning side to null (unless already changed)
-            if ($sorty->getEtat() === $this) {
-                $sorty->setEtat(null);
-            }
-        }
 
-        return $this;
-    }
 
 }

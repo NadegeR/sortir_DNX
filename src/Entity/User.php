@@ -74,21 +74,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $photo;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Campus::class, inversedBy="users")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $campus;
-
-    /**
-     * @ORM\OneToMany(targetEntity=Sortie::class, mappedBy="organisateur", orphanRemoval=true)
-     */
-    private $organisateurSorties;
-
-    /**
-     * @ORM\ManyToMany(targetEntity=Sortie::class)
-     */
-    private $inscrit;
 
     public function __construct()
     {
@@ -269,69 +254,5 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getCampus(): ?Campus
-    {
-        return $this->campus;
-    }
 
-    public function setCampus(?Campus $campus): self
-    {
-        $this->campus = $campus;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Sortie>
-     */
-    public function getOrganisateurSorties(): Collection
-    {
-        return $this->organisateurSorties;
-    }
-
-    public function addOrganisateurSorty(Sortie $organisateurSorty): self
-    {
-        if (!$this->organisateurSorties->contains($organisateurSorty)) {
-            $this->organisateurSorties[] = $organisateurSorty;
-            $organisateurSorty->setOrganisateur($this);
-        }
-
-        return $this;
-    }
-
-    public function removeOrganisateurSorty(Sortie $organisateurSorty): self
-    {
-        if ($this->organisateurSorties->removeElement($organisateurSorty)) {
-            // set the owning side to null (unless already changed)
-            if ($organisateurSorty->getOrganisateur() === $this) {
-                $organisateurSorty->setOrganisateur(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Sortie>
-     */
-    public function getInscrit(): Collection
-    {
-        return $this->inscrit;
-    }
-
-    public function addInscrit(Sortie $inscrit): self
-    {
-        if (!$this->inscrit->contains($inscrit)) {
-            $this->inscrit[] = $inscrit;
-        }
-
-        return $this;
-    }
-
-    public function removeInscrit(Sortie $inscrit): self
-    {
-        $this->inscrit->removeElement($inscrit);
-
-        return $this;
-    }
 }

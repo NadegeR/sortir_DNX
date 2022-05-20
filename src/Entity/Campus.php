@@ -24,15 +24,6 @@ class Campus
      */
     private $nom;
 
-    /**
-     * @ORM\OneToMany(targetEntity=Sortie::class, mappedBy="siteOrganisateur")
-     */
-    private $sortieOrganiseePar;
-
-    /**
-     * @ORM\OneToMany(targetEntity=User::class, mappedBy="campus", orphanRemoval=true)
-     */
-    private $users;
 
     public function __construct()
     {
@@ -57,63 +48,5 @@ class Campus
         return $this;
     }
 
-    /**
-     * @return Collection<int, Sortie>
-     */
-    public function getSortieOrganiseePar(): Collection
-    {
-        return $this->sortieOrganiseePar;
-    }
 
-    public function addSortieOrganiseePar(Sortie $sortieOrganiseePar): self
-    {
-        if (!$this->sortieOrganiseePar->contains($sortieOrganiseePar)) {
-            $this->sortieOrganiseePar[] = $sortieOrganiseePar;
-            $sortieOrganiseePar->setSiteOrganisateur($this);
-        }
-
-        return $this;
-    }
-
-    public function removeSortieOrganiseePar(Sortie $sortieOrganiseePar): self
-    {
-        if ($this->sortieOrganiseePar->removeElement($sortieOrganiseePar)) {
-            // set the owning side to null (unless already changed)
-            if ($sortieOrganiseePar->getSiteOrganisateur() === $this) {
-                $sortieOrganiseePar->setSiteOrganisateur(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, User>
-     */
-    public function getUsers(): Collection
-    {
-        return $this->users;
-    }
-
-    public function addUser(User $user): self
-    {
-        if (!$this->users->contains($user)) {
-            $this->users[] = $user;
-            $user->setCampus($this);
-        }
-
-        return $this;
-    }
-
-    public function removeUser(User $user): self
-    {
-        if ($this->users->removeElement($user)) {
-            // set the owning side to null (unless already changed)
-            if ($user->getCampus() === $this) {
-                $user->setCampus(null);
-            }
-        }
-
-        return $this;
-    }
 }

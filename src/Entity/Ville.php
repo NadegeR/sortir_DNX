@@ -27,11 +27,6 @@ class Ville
      */
     private $codePostal;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Lieu::class, inversedBy="ville")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $lieux;
 
     public function getId(): ?int
     {
@@ -62,15 +57,5 @@ class Ville
         return $this;
     }
 
-    public function getLieux(): ?Lieu
-    {
-        return $this->lieux;
-    }
 
-    public function setLieux(?Lieu $lieux): self
-    {
-        $this->lieux = $lieux;
-
-        return $this;
-    }
 }
