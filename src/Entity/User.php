@@ -74,11 +74,29 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $photo;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Campus::class, inversedBy="users")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $campus;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Sortie::class, inversedBy="participants")
+     */
+    private $isInscrit;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Sortie::class, mappedBy="organisateurs")
+     */
+    private $organisateur;
+
 
     public function __construct()
     {
         $this->organisateurSorties = new ArrayCollection();
         $this->inscrit = new ArrayCollection();
+        $this->isInscrit = new ArrayCollection();
+        $this->organisateur = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -250,6 +268,72 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setPhoto(?string $photo): self
     {
         $this->photo = $photo;
+
+        return $this;
+    }
+
+    public function getCampus(): ?Campus
+    {
+        return $this->campus;
+    }
+
+    public function setCampus(?Campus $campus): self
+    {
+        $this->campus = $campus;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Sortie>
+     */
+    public function getIsInscrit(): Collection
+    {
+        return $this->isInscrit;
+    }
+
+    public function addIsInscrit(Sortie $isInscrit): self
+    {
+        if (!$this->isInscrit->contains($isInscrit)) {
+            $this->isInscrit[] = $isInscrit;
+        }
+
+        return $this;
+    }
+
+    public function removeIsInscrit(Sortie $isInscrit): self
+    {
+        $this->isInscrit->removeElement($isInscrit);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Sortie>
+     */
+    public function getOrganisateur(): Collection
+    {
+        return $this->organisateur;
+    }
+
+    public function addOrganisateur(Sortie $organisateur): self
+    {
+        if (!$this->organisateur->contains($organisateur)) {
+            $this->organisateur[] = $organisateur;
+            $organisateur->setOrganisateurs($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOrganisateur(Sortie $organisateur): self
+    {
+        if ($this->organisateur->removeElement($organisateur)) {
+            // set the owning side to null (unless already changed)
+            if ($organisateur->getOrganisateurs() === $this) {
+                $organisateur->setOrganisateurs(null);
+            }
+        }
 
         return $this;
     }
