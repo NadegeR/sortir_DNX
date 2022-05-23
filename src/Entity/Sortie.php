@@ -5,7 +5,9 @@ namespace App\Entity;
 use App\Repository\SortieRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Mapping as ORM;
+
 
 /**
  * @ORM\Entity(repositoryClass=SortieRepository::class)
@@ -236,5 +238,66 @@ class Sortie
         return $this;
     }
 
+    public function modifierEtat (Sortie $sortie, EntityManager $entityManager)
+    {
+        $maintenant = new \DateTime();
+        $minutes = $sortie->getDuree();
+        $dateCloture = $sortie->getDateLimiteInscription();
+
+        $debutSortie = $sortie->getDateHeureDebut();
+        $debutSortieString = $debutSortie->format('d/m/Y H:i');
+
+        $temps = strtotime("+{$minutes} minutes",strtotime($debutSortieString));
+        $dateDeFin = new \DateTime();
+        $dateDeFin->setTimestamp($temps);
+        $dateDeFinString = $dateDeFin->format('d/m/Y H:i');
+
+        $tempsArchive = strtotime('+1 month', strtotime($dateDeFinString));
+        $archivage = new \DateTime();
+        $archivage->setTimestamp($tempsArchive);
+
+        $libelleEtat = '';
+
+        if($sortie->getEtat()->getLibelle() != Etat::CREE && $sortie->getEtat()->getLibelle() != Etat::ANNULEE)
+        {
+            if($sortie->getParticipants()->count() >= $sortie->getNbIscriptionsMax())
+            {
+                $libelleEtat = Etat::CLOTUREE;
+            }
+            else{
+                $libelleEtat = Etat::OUVERTE;
+            }
+
+            if($dateCloture < $maintenant && $debutSortie > $maintenant)
+            {
+                $libelleEtat = Etat::CLOTUREE;
+            }
+            elseif ($debutSortie <= $maintenant && $dateDeFin >= $maintenant)
+            {
+                $libelleEtat = Etat::EN_COURS;
+            }
+            elseif ($debutSortie < $maintenant && $maintenant <= $archivage)
+            {
+                $libelleEtat = Etat::PASSEE;
+            }
+            elseif ($maintenant > $archivage)
+            {
+                $libelleEtat = Etat::ARCHIVEE;
+            }
+
+
+
+
+        }
+
+
+
+
+
+
+
+
+
+    }
 
 }
