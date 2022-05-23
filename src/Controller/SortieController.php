@@ -7,6 +7,7 @@ use App\Form\SortieType;
 use App\Entity\Etat;
 use App\Repository\EtatRepository;
 use App\Repository\SortieRepository;
+use App\Repository\VilleRepository;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -32,8 +33,9 @@ class SortieController extends AbstractController
     /**
      * @Route("/new", name="nouvelle-sortie", methods={"GET", "POST"})
      */
-    public function new(Request $request, SortieRepository $sortieRepository, EtatRepository $etatRepository): Response
+    public function new(Request $request, SortieRepository $sortieRepository, EtatRepository $etatRepository, VilleRepository $villeRepository): Response
     {
+        $villes= $villeRepository->findAll();
         $sortie = new Sortie();
 
         $form = $this->createForm(SortieType::class, $sortie);
@@ -62,11 +64,12 @@ class SortieController extends AbstractController
 
             $sortieRepository->add($sortie, true);
 
-            return $this->redirectToRoute('details-sortie', ['id' => $sortie->getId()], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('details-sortie', ['id' => $sortie->getId()],  Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('sortie/new.html.twig', [
             'sortie' => $sortie,
+            'villes'=> $villes,
             'form' => $form,
         ]);
     }

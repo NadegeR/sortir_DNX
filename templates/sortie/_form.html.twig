@@ -1,5 +1,43 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-<button name="enregistrer" value="creee">Enregistrer</button>
-<button name="publier" value="ouverte">Publier</button>
+    {# {{ form_widget(form) }} #}
+    <div>
+        {{ form_label(form.nom, 'Nom de la sortie :') }}
+        {{ form_widget(form.nom) }}
+    </div>
+    <div>
+        {{ form_label(form.dateHeureDebut) }}
+        {{ form_widget(form.dateHeureDebut) }}
+    </div>
+    <div>
+        {{ form_label(form.duree) }}
+        {{ form_widget(form.duree) }}
+    </div>
+    <div>
+        {{ form_label(form.dateLimiteInscription) }}
+        {{ form_widget(form.dateLimiteInscription) }}
+    </div>
+    <div>
+        {{ form_label(form.nbIscriptionsMax) }}
+        {{ form_widget(form.nbIscriptionsMax) }}
+    </div>
+    <div>
+        {{ form_label(form.infosSortie) }}
+        {{ form_widget(form.infosSortie) }}
+    </div>
+<div>
+    <label for="cities">Ville :</label>
+    <select name="cities" id="cities" >
+        <option value="">Choisir une ville...</option>
+        {% for ville in villes %}
+            <option value="{{ ville.id }}">{{ ville.nom }}</option>
+        {% endfor %}
+    </select>
+</div>
+<div>
+    {{ form_label(form.lieu) }}
+    {{ form_widget(form.lieu) }}
+</div>
+
+    <button name="enregistrer" value="creee">Enregistrer</button>
+    <button name="publier" value="ouverte">Publier</button>
 {{ form_end(form) }}

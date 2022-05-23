@@ -5,7 +5,9 @@
 {% block body %}
     <h1>Créer une nouvelle sortie</h1>
 
-    {{ include('sortie/_form.html.twig') }}
+  {{ include('sortie/_form.html.twig') }}
+
+
 
     <a href="{{ path('liste-sorties') }}"><button>Retour à la liste</button></a>
 {% endblock %}
