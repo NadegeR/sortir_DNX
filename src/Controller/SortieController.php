@@ -77,18 +77,21 @@ class SortieController extends AbstractController
     /**
      * @Route("/details/{id}", name="details-sortie", methods={"GET"})
      */
-    public function show(Sortie $sortie): Response
+    public function show(Sortie $sortie, VilleRepository $villeRepository): Response
     {
+        $villes= $villeRepository->findAll();
         return $this->render('sortie/show.html.twig', [
             'sortie' => $sortie,
+            'villes'=> $villes,
         ]);
     }
 
     /**
      * @Route("org/{id}/edit", name="editer-sortie", methods={"GET", "POST"})
      */
-    public function edit(Request $request, Sortie $sortie, SortieRepository $sortieRepository, EtatRepository $etatRepository): Response
+    public function edit(Request $request, Sortie $sortie, SortieRepository $sortieRepository, EtatRepository $etatRepository, VilleRepository $villeRepository): Response
     {
+        $villes= $villeRepository->findAll();
         $form = $this->createForm(SortieType::class, $sortie);
         $form->handleRequest($request);
 
@@ -113,6 +116,7 @@ class SortieController extends AbstractController
 
         return $this->renderForm('sortie/edit.html.twig', [
             'sortie' => $sortie,
+            'villes'=> $villes,
             'form' => $form,
         ]);
     }
