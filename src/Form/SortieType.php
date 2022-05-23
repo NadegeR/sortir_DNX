@@ -2,6 +2,7 @@
 
 namespace App\Form;
 
+use App\Entity\Etat;
 use App\Entity\Lieu;
 use App\Entity\Sortie;
 use App\Entity\Ville;
@@ -22,16 +23,17 @@ class SortieType extends AbstractType
     {
         $builder
             ->add('nom', TextType::class, ['label'=> 'Nom'])
-            ->add('dateHeureDebut', DateTimeType::class, ['label'=> 'Date et heure de debut','html5'=> true,'widget'=> 'single_text'] )
-            ->add('duree', IntegerType::class, ['attr'=>['min'=>10], 'label'=> 'Duree en minutes'])
+            ->add('dateHeureDebut', DateTimeType::class, ['label'=> 'Date et heure de debut : ','html5'=> true,'widget'=> 'single_text'] )
+            ->add('duree', IntegerType::class, ['attr'=>['min'=>10], 'label'=> 'Duree en minutes :'])
             ->add('dateLimiteInscription',DateTimeType::class, ['html5'=> true,'widget'=> 'single_text'])
-            ->add('nbIscriptionsMax',IntegerType::class, ['attr'=>['min'=>0], 'label'=> 'Places disponibles'])
-            ->add('infosSortie', TextareaType::class, ['label'=> 'Description de la sortie'])
-            ->add('lieu', EntityType::class, ['label'=> 'Lieu',
+            ->add('nbIscriptionsMax',IntegerType::class, ['attr'=>['min'=>0], 'label'=> 'Places disponibles : '])
+            ->add('infosSortie', TextareaType::class, ['label'=> 'Description de la sortie : '])
+            ->add('lieu', EntityType::class, ['label'=> 'Lieu :',
                 'class' => Lieu::class,
                 'choice_label' => 'nom',
                 'placeholder' => 'Choisir un lieu...'
             ])
+
 //            ->add('siteOrganisateur', EntityType::class, ['label'=> 'Campus',
 //                'class' => 'App\Entity\Campus',
 //                'choice_label' => 'nom',

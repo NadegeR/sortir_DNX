@@ -5,9 +5,11 @@
 {% block body %}
     <h1>Modifier une Sortie</h1>
 
-    {{ include('sortie/_form.html.twig', {'button_label': 'Enregistrer'}) }}
+    {{ include('sortie/_form.html.twig') }}
 
     <a href="{{ path('liste-sorties') }}"><button>Retour à la liste des sorties</button></a>
-
+    {% if sortie.organisateurs.id == app.user.id %}
+    <a href="{{ path('annuler-sortie', {'id': sortie.id}) }}"><button>Annuler la sortie</button></a>
+    {% endif %}
     {{ include('sortie/_delete_form.html.twig') }}
 {% endblock %}

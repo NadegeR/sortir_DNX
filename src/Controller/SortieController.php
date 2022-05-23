@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Sortie;
+use App\Form\AnnulationType;
 use App\Form\SortieType;
 use App\Entity\Etat;
 use App\Repository\EtatRepository;
@@ -46,7 +47,7 @@ class SortieController extends AbstractController
             $campus= $user->getCampus();
 
             if ($request->get('enregistrer')) {
-                $etat=$etatRepository->find(1);
+                $sortie->setEtat($etatRepository->find(1));
             }
            else {$sortie->setEtat($etatRepository->find(2));
             }
@@ -117,6 +118,30 @@ class SortieController extends AbstractController
         return $this->renderForm('sortie/edit.html.twig', [
             'sortie' => $sortie,
             'villes'=> $villes,
+            'form' => $form,
+        ]);
+    }
+    /**
+     * @Route("org/{id}", name="annuler-sortie", methods={"GET", "POST"})
+     */
+    public function annuler(Request $request, Sortie $sortie, SortieRepository $sortieRepository, EtatRepository $etatRepository): Response
+    {
+        $form = $this->createForm(AnnulationType::class, $sortie);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            // au clic sur le bouton "annuler"
+            if ($request->get('annuler')) {
+                $sortie->setEtat($etatRepository->find(6));
+            }
+            $sortieRepository->add($sortie, true);
+            //message flash
+            $this->addFlash('success', 'La sortie a ete annulee !');
+
+            return $this->redirectToRoute('liste-sorties', [], Response::HTTP_SEE_OTHER);
+        }
+        return $this->renderForm('sortie/annulerSortie.html.twig', [
+            'sortie' => $sortie,
             'form' => $form,
         ]);
     }
