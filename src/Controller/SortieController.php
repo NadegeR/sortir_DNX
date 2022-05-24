@@ -65,6 +65,7 @@ class SortieController extends AbstractController
 
             $sortieRepository->add($sortie, true);
 
+            $this->addFlash('success', 'La sortie a été créée !');
             return $this->redirectToRoute('details-sortie', ['id' => $sortie->getId()],  Response::HTTP_SEE_OTHER);
         }
 
@@ -111,6 +112,7 @@ class SortieController extends AbstractController
 //            $sortie->setEtat($etat);
 
             $sortieRepository->add($sortie, true);
+            $this->addFlash('success', 'La sortie a été modifiée !');
 
             return $this->redirectToRoute('details-sortie', ['id' => $sortie->getId()], Response::HTTP_SEE_OTHER);
         }
@@ -136,7 +138,7 @@ class SortieController extends AbstractController
             }
             $sortieRepository->add($sortie, true);
             //message flash
-            $this->addFlash('success', 'La sortie a ete annulee !');
+            $this->addFlash('success', 'La sortie a été annulée !');
 
             return $this->redirectToRoute('liste-sorties', [], Response::HTTP_SEE_OTHER);
         }
