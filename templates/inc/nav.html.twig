@@ -7,8 +7,12 @@
     {% if app.user %}
         <ul>
             <li><a href="{{ path('liste-sorties') }}" title="Home">Liste</a></li>
-            {# <li><a href="{{ path('profil') }}" title="Test">Mon profil</a></li>
-        <li><a href="{{ path('deconnexion') }}" title="All series">Se déconnecter</a></li> #}
+            <li><a href="{{ path('details_profil', {'id': app.user.id}) }}" title="monProfil">Mon profil</a></li>
+            <li><a href="{{ path('app_logout') }}" title="deconnexion">Se déconnecter ({{ app.user.prenom}})</a></li>
+{#{% if is_granted("ROLE_ADMIN") %}
+            <li><a href="{{ path('')}}" title="ajouterVille">Ajouter Ville</a></li>
+            <li><a href="{{ path('')}}" title="ajouterCampus">Ajouter Campus</a></li>
+            {% endif %}#}
         </ul>
     {% endif %}
 </nav>

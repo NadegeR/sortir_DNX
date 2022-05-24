@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Sortie;
 use App\Form\AnnulationType;
+use App\Form\FiltreSortieType;
 use App\Form\SortieType;
 use App\Repository\EtatRepository;
 use App\Repository\SortieRepository;
@@ -22,8 +23,16 @@ class SortieController extends AbstractController
     /**
      * @Route("", name="liste-sorties", methods={"GET"})
      */
-    public function index(SortieRepository $sortieRepository): Response
+    public function index(Request $request, SortieRepository $sortieRepository): Response
     {
+        $filtreForm = $this->createForm(FiltreSortieType::class);
+        $filtreForm->handleRequest($request);
+
+        if ($filtreForm->isSubmitted() && $filtreForm->isValid()) {
+            $filtre = $filtreForm->getData();
+
+
+        }
         return $this->render('sortie/index.html.twig', [
             'sorties' => $sortieRepository->findAll(),
         ]);
