@@ -5,11 +5,9 @@ namespace App\Controller;
 use App\Entity\Sortie;
 use App\Form\AnnulationType;
 use App\Form\SortieType;
-use App\Entity\Etat;
 use App\Repository\EtatRepository;
 use App\Repository\SortieRepository;
 use App\Repository\VilleRepository;
-use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -158,6 +156,36 @@ class SortieController extends AbstractController
         }
 
         return $this->redirectToRoute('liste-sorties', [], Response::HTTP_SEE_OTHER);
+    }
+
+    /**
+     * @Route("/{action}/{id}/", name="inscription_desinscription", methods={"GET", "POST"})
+     */
+
+    public function inscription(int $id, string $action, SortieRepository $sortieRepository, EntityManagerInterface $entityManager): Response
+    {
+        $sortie = $sortieRepository->find($id);
+        $user = $this->getUser();
+        $flashMesssage = '';
+        switch ($action) {
+            case 'inscription':
+                $sortie->addParticipant($user);
+                $flashMesssage = 'Vous êtes inscrit(e)'. $sortie->getNom();
+                break;
+            case 'desinscription':
+                $sortie->removeParticipant($user);
+                $flashMesssage = 'Vous êtes désinscrit(e)'. $sortie->getNom();
+                break;
+        }
+        $entityManager->persist($sortie);
+        $entityManager->flush();
+
+        $this->addFlash(
+            'notice',
+            $flashMesssage
+        );
+
+        return $this->redirectToRoute('liste-sorties');
     }
 
 
