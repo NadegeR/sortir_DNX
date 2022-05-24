@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Sortie;
 use App\Form\AnnulationType;
 use App\Form\FiltreSortieType;
+use App\Form\FiltresType;
 use App\Form\SortieType;
 use App\Repository\EtatRepository;
 use App\Repository\SortieRepository;
@@ -21,20 +22,28 @@ use Symfony\Component\Routing\Annotation\Route;
 class SortieController extends AbstractController
 {
     /**
-     * @Route("", name="liste-sorties", methods={"GET"})
+     * @Route("", name="liste-sorties", methods={"GET", "POST"})
      */
     public function index(Request $request, SortieRepository $sortieRepository): Response
     {
-        $filtreForm = $this->createForm(FiltreSortieType::class);
+        $user = $this->getUser();
+        $filtreForm = $this->createForm(FiltresType::class);
         $filtreForm->handleRequest($request);
 
         if ($filtreForm->isSubmitted() && $filtreForm->isValid()) {
             $filtre = $filtreForm->getData();
-
-
+            if(!empty(array_filter($filtre, function ($f){ return $f;}))){
+                $sorties = $sortieRepository->sortieParFiltres($filtre);
+            } else {
+                $sorties= $sortieRepository->findAll();
+            }
+        }else {
+            $sorties = $sortieRepository->findAll();
         }
-        return $this->render('sortie/index.html.twig', [
-            'sorties' => $sortieRepository->findAll(),
+        return $this->renderForm('sortie/index.html.twig', [
+            'sorties' => $sorties,
+            'user'=> $user,
+            'sortiesFiltreesForm'=> $filtreForm
         ]);
     }
 
