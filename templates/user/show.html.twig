@@ -58,13 +58,13 @@
     </table>
 
 
-        <a href="{{ path('liste-sorties') }}">Retour à la liste des sorties</a>
+        <button><a href="{{ path('liste-sorties') }}">Retour à la liste des sorties</a></button>
     {% if is_granted("ROLE_ADMIN") %}
-        <a href="{{ path('admin_liste_users') }}">Retour liste des Users</a>
+        <button><a href="{{ path('admin_liste_users') }}">Retour liste des Users</a></button>
     {{ include('user/_delete_form.html.twig') }}
     {% endif %}
     {% if app.user.id == user.id %}
-    <a href="{{ path('editer_profil', {'id': user.id}) }}">edit</a>
+    <button><a href="{{ path('editer_profil', {'id': user.id}) }}">edit</a></button>
     {% endif %}
 
 {% endblock %}

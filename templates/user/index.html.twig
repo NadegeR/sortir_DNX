@@ -3,7 +3,7 @@
 {% block title %}User index{% endblock %}
 
 {% block body %}
-    <h1>User index</h1>
+    <h1>Liste des Utilisateurs</h1>
 
     <table class="table">
         <thead>
@@ -37,9 +37,9 @@
                 <td>{{ user.pseudo }}</td>
                 <td>{{ user.photo }}</td>
                 <td>
-                    <a href="{{ path('details_profil', {'id': user.id}) }}">show</a>
+            <button><a href="{{ path('details_profil', {'id': user.id}) }}">show</a></button>
                     {% if app.user.id == user.id %}
-                    <a href="{{ path('editer_profil', {'id': user.id}) }}">edit</a>
+                        <button><a href="{{ path('editer_profil', {'id': user.id}) }}">edit</a></button>
                 </td>
             </tr>
         {% else %}
@@ -51,5 +51,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('admin_new_user') }}">Create new</a>
+    <button><a href="{{ path('admin_new_user') }}">Créer un nouvel utilisateur</a></button>
 {% endblock %}

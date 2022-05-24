@@ -25,9 +25,9 @@ class FiltresType extends AbstractType
     ])
 
         ->add('nom', TextType::class, [
-            'label'=> 'contient: ',
+            'label'=> 'Contient: ',
             'required' => false,
-            'attr' => ['placeholder'=> 'Nom sotie']
+            'attr' => ['placeholder'=> 'Nom sortie']
         ])
 
         ->add('dateDebut', DateType::class, [

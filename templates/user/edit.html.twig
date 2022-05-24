@@ -7,7 +7,7 @@
 
     {{ include('user/_form.html.twig', {'button_label': 'Enregistrer'}) }}
     {% if is_granted("ROLE_ADMIN") %}
-    <a href="{{ path('admin_liste_users') }}">back to list</a>
+    <button><a href="{{ path('admin_liste_users') }}">Retour à la liste des utilisateurs</a></button>
 
     {{ include('user/_delete_form.html.twig') }}
     {% endif %}

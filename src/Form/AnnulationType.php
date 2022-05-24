@@ -13,7 +13,9 @@ class AnnulationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('Motif', TextareaType::class, ['required'=>false])
+            ->add('Motif', TextareaType::class, [
+                'attr' => ['placeholder'=> 'Veuillez saisir un motif d\'annulation'],
+                'required'=>false])
         ;
     }
 

@@ -1,0 +1,95 @@
+
+html, body {
+    margin: 0;
+    font-family: Bahnschrift, sans-serif;
+    font-size: 16px;
+}
+
+main{
+    padding: 1rem 5rem;
+    margin-left: 2rem;
+    text-align: justify;
+}
+input, textarea, select{
+    margin-bottom: 5rem;
+}
+input[type=checkbox] {
+    vertical-align: middle;
+    position: relative;
+    bottom: 1px;
+}
+
+label{
+    padding: 5px 5px;
+    width: 17rem;
+    display: inline-block;
+}
+
+a{
+    text-decoration: none;
+    color: black;
+    cursor: pointer;
+}
+
+
+
+.navbar-menu{
+    border: 1px gray;
+    background-color: #999999;
+
+}
+.navbar-item{
+    padding: 0px 10px;
+    margin: auto;
+    list-style: none;
+    display: inline-block;
+    flex-direction: row;
+    justify-content: flex-end;
+    width: auto;
+    height: auto;
+    border-right: 0.5px solid transparent;
+}
+.navbar-link{
+    display: flex;
+    padding: 0px 10px;
+    justify-content: flex-end;
+    align-items: center;
+    text-decoration: none;
+    color: black;
+    cursor: pointer;
+
+}
+
+.entete{
+    padding: 1rem 4rem;
+    text-align: justify;
+}
+
+footer{
+    bottom:0;
+    width:100%;
+    padding-top:50px;
+    height:50px;
+    text-align: center;
+}
+.table{
+    padding: 1px 2px;
+    text-align: center;
+    border: 1px #999999;
+    border-radius: 5%;
+}
+th{
+    height: 10px;
+}
+td{
+    padding: 1px 25px;
+    text-align: center;
+    width: auto;
+}
+tr{
+    padding: 2px 2px;
+    width: content-box;
+}
+
+
+
