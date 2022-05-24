@@ -10,6 +10,7 @@ use Symfony\Component\Form\Extension\Core\DataTransformer\BooleanToStringTransfo
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\File;
@@ -22,7 +23,7 @@ class UserType extends AbstractType
     {
         $builder
             ->add('email', EmailType::class)
-            ->add('roles')
+
             ->add('password', PasswordType::class, [
                 // instead of being set onto the object directly,
                 // this is read and encoded in the controller
@@ -39,12 +40,13 @@ class UserType extends AbstractType
                         'max' => 4096,
                     ]),
                 ],
+
             ])
+
             ->add('nom')
             ->add('prenom')
             ->add('telephone')
-            ->add('administrateur')
-            ->add('actif')
+
             ->add('pseudo')
             ->add('photo', FileType::class, ['label' => 'Photo de profil (.jpg et.png)', 'mapped' => false,
                 'constraints' => [new File([
