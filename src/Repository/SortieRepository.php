@@ -41,50 +41,53 @@ class SortieRepository extends ServiceEntityRepository
 
     public function sortieParFiltres($filtre): array
     {
-        $query = $this->createQueryBuilder('sortie');
+        $queryB = $this->createQueryBuilder('sortie');
 
         if ($filtre['campus']) {
-            $query->andWhere('sortie.siteOrganisateur = :campus')
-                  ->setParameter('campus', $filtre['campus']);
+            $queryB->andWhere('sortie.siteOrganisateur = :campus')
+                ->setParameter('campus', $filtre['campus']);
         }
 
         if ($filtre['nom']) {
-            $query->andWhere('sortie.nom LIKE :nom')
-                  ->setParameter('nom', '%' . $filtre['nom'] . '%');
+            $queryB->andWhere('sortie.nom LIKE :nom')
+                ->setParameter('nom', '%' . $filtre['nom'] . '%');
         }
 
         if ($filtre['dateDebut'] || $filtre['dateFin']) {
             $dateDebut = $filtre['dateDebut'] ? date_format($filtre['dateDebut'], 'd-m-Y') : date('d-m-Y');
             $dateFin = $filtre['dateFin'] ? date_format($filtre['dateFin'], 'd-m-Y') : date('d-m-Y');
-            $query->andWhere('sortie.dateHeureDebut BETWEEN :dateDebut and :dateFin')
-                  ->setParameter('dateDebut', $dateDebut)
-                  ->setParameter('dateFin', $dateFin);
+            $queryB->andWhere('sortie.dateHeureDebut BETWEEN :dateDebut and :dateFin')
+                ->setParameter('dateDebut', $dateDebut)
+                ->setParameter('dateFin', $dateFin);
         }
 
         if ($filtre['organisateur']) {
-            $query->andWhere('sortie.organisateurs = :organisateur')
-                  ->setParameter('organisateur', $filtre['userID']);
+            $queryB->andWhere('sortie.organisateurs = :organisateur')
+                ->setParameter('organisateur', $filtre['userID']);
         }
 
-        if($filtre['inscrit']){
-            $query ->andWhere(':userID MEMBER OF sortie.isInscrit')
-                   ->setParameter('userID', $filtre['userID']);
+        if ($filtre['inscrit']) {
+            $queryB->andWhere(':userID MEMBER OF sortie.isInscrit')
+                ->setParameter('userID', $filtre['userID']);
         }
 
-        if($filtre['nonInscrit']) {
-            $query->andWhere(':userId NOT MEMBER OF sortie.isInscrit')
-                  ->setParameter('userID', $filtre['userID'])
-                  ->andWhere('sortie.organisateurs != :organisateur')
-                  ->setParameter('organisateur', $filtre['userID']);
+        if ($filtre['nonInscrit']) {
+            $queryB->andWhere(':userId NOT MEMBER OF sortie.isInscrit')
+                ->setParameter('userID', $filtre['userID'])
+                ->andWhere('sortie.organisateurs != :organisateur')
+                ->setParameter('organisateur', $filtre['userID']);
         }
 
-        if($filtre['passee']){
+//        if($filtre['passee']){
+//
+//        }
+        $query = $queryB->getQuery();
+        return $query->execute();
+    }
 
-        }
 
 
 
-}
 
 
 //    /**

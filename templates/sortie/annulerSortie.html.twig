@@ -8,7 +8,7 @@
 
 <h2> Annuler la sortie </h2>
 
-{{ form_start(form) }}
+
 
 <div>
 Nom de la sortie :
@@ -26,7 +26,7 @@ Date de la sortie :
 Lieu :
  {{ sortie.lieu.nom }} {{ sortie.lieu.rue}} {{ sortie.lieu.ville.nom}} {{ sortie.lieu.ville.codePostal}}
 </div>
-
+ {{ form_start(form) }}
  <a href="{{ path('annuler-sortie', { 'id': sortie.id }) }}"><button name="annuler" value="annulee">Annuler la sortie</button></a>
  <a href="{{ path('liste-sorties') }}"><button>Retour</button></a>
  {{ form_end(form)}}
