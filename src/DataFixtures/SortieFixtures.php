@@ -11,7 +11,7 @@ use App\Repository\CampusRepository;
 use App\Repository\EtatRepository;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
-use Faker;
+
 
 class SortieFixtures extends Fixture
 {
