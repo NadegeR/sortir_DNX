@@ -38,7 +38,7 @@
                 <a href="{{ path('annuler-sortie', {'id': sortie.id}) }}">Annuler</a>
             {% endif %}
 
-            {% if app.user == sortie.participants %}
+            {% if app.user in sortie.participants and sortie.etat.libelle == 'Ouverte'%}
                  <a href="{{ path('inscription_desinscription', {'id': sortie.id, action: 'desinscription'}) }}">Se
                 désinscrire</a>
             {% elseif (app.user != sortie.organisateurs and app.user not in sortie.participants) %}
