@@ -5,6 +5,15 @@
 {% block body %}
     <h1>Profil {{ user.nom}}</h1>
 
+    <div>
+        {% if user.photo != null %}
+        <img src="{{ asset('uploads/photos/' ~ user.photo)}}">
+        {% else%}
+        <img src="{{ asset('uploads/photos/chien-rire.gif')}}">
+        {% endif %}
+    </div>
+
+
     <table class="table">
         <tbody>
         <tr>
@@ -27,10 +36,7 @@
             <th>Telephone</th>
             <td>{{ user.telephone }}</td>
         </tr>
-        <tr>
-            <th>Photo</th>
-            <td>{{ user.photo }}</td>
-        </tr>
+
 
         {% if is_granted("ROLE_ADMIN") %}
         <tr>

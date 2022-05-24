@@ -24,23 +24,31 @@ class UserType extends AbstractType
         $builder
             ->add('email', EmailType::class)
 
-            ->add('password', PasswordType::class, [
-                // instead of being set onto the object directly,
+            ->add('plainPassword', RepeatedType::class, [
+                'required'=> false,
+                'label'=> 'Changer de mot de passe: ',
+                'type' => PasswordType::class,
+                'first_options' => [
+
+                    'attr' => ['autocomplete' => 'new-password'],
+                    'constraints' => [
+                        new Length([
+                            'min' => 6,
+                            'minMessage' => 'Your password should be at least {{ limit }} characters',
+                            // max length allowed by Symfony for security reasons
+                            'max' => 4096,
+                        ]),
+                    ],
+                    'label' => 'Nouveau mot de passe',
+                ],
+                'second_options' => [
+                    'attr' => ['autocomplete' => 'new-password'],
+                    'label' => 'Confirmation du mot de passe',
+                ],
+                'invalid_message' => 'The password fields must match.',
+                // Instead of being set onto the object directly,
                 // this is read and encoded in the controller
                 'mapped' => false,
-                'attr' => ['autocomplete' => 'new-password'],
-                'constraints' => [
-                    new NotBlank([
-                        'message' => 'Enter un mot de passe',
-                    ]),
-                    new Length([
-                        'min' => 6,
-                        'minMessage' => 'Votre mot de passe doit avoir {{ limit }} caracteres',
-                        // max length allowed by Symfony for security reasons
-                        'max' => 4096,
-                    ]),
-                ],
-
             ])
 
             ->add('nom')
@@ -48,7 +56,7 @@ class UserType extends AbstractType
             ->add('telephone')
 
             ->add('pseudo')
-            ->add('photo', FileType::class, ['label' => 'Photo de profil (.jpg et.png)', 'mapped' => false,
+            ->add('photo', FileType::class, ['label' => 'Photo de profil (.jpg et.png)', 'required'=>false, 'mapped' => false,
                 'constraints' => [new File([
                     'maxSize' => '1024k',
                     'mimeTypes' => [
@@ -64,6 +72,8 @@ class UserType extends AbstractType
                 'class' => Campus::class,
                 'choice_label' => 'nom'
             ])
+
+
 
             ;
     }

@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
@@ -63,12 +64,23 @@ class UserController extends AbstractController implements PasswordUpgraderInter
     /**
      * @Route("/profil/editer/{id}", name="editer_profil", methods={"GET", "POST"})
      */
-    public function edit(Request $request, User $user, UserRepository $userRepository, SluggerInterface $slugger): Response
+    public function edit(Request $request, User $user, UserRepository $userRepository, SluggerInterface $slugger, UserPasswordHasherInterface $userPasswordHasher): Response
     {
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $newPassword = $form->get('plainPassword')->getData();
+            if ($newPassword) {
+                // modification du mot de passe dans edition du profil
+                $mdpEncode = $userPasswordHasher->hashPassword(
+                    $user,
+                    $newPassword);
+                $user->setPassword($mdpEncode);
+            }
+
+
             $photoFile = $form->get('photo')->getData();
             // prise en charge de l'image
             if ($photoFile) {
