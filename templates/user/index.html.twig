@@ -16,7 +16,7 @@
                 <th>Prenom</th>
                 <th>Telephone</th>
                 <th>Administrateur</th>
-                <th>Acitif</th>
+                <th>Actif</th>
                 <th>Pseudo</th>
                 <th>Photo</th>
                 <th>actions</th>
@@ -33,12 +33,12 @@
                 <td>{{ user.prenom }}</td>
                 <td>{{ user.telephone }}</td>
                 <td>{{ user.administrateur ? 'Yes' : 'No' }}</td>
-                <td>{{ user.acitif ? 'Yes' : 'No' }}</td>
+                <td>{{ user.actif ? 'Yes' : 'No' }}</td>
                 <td>{{ user.pseudo }}</td>
                 <td>{{ user.photo }}</td>
                 <td>
                     <a href="{{ path('details_profil', {'id': user.id}) }}">show</a>
-                    {% if %}
+                    {% if app.user.id == user.id %}
                     <a href="{{ path('editer_profil', {'id': user.id}) }}">edit</a>
                 </td>
             </tr>
@@ -46,6 +46,7 @@
             <tr>
                 <td colspan="12">no records found</td>
             </tr>
+            {% endif %}
         {% endfor %}
         </tbody>
     </table>

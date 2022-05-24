@@ -40,7 +40,7 @@ class RegistrationFormType extends AbstractType
                 ],
             ])
             ->add('administrateur')
-            ->add('acitif')
+            ->add('actif')
             ->add('campus', EntityType::class, [
                 'label' => 'Campus',
                 'class' => Campus::class,

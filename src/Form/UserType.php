@@ -44,7 +44,7 @@ class UserType extends AbstractType
             ->add('prenom')
             ->add('telephone')
             ->add('administrateur')
-            ->add('acitif')
+            ->add('actif')
             ->add('pseudo')
             ->add('photo', FileType::class, ['label' => 'Photo de profil (.jpg et.png)', 'mapped' => false,
                 'constraints' => [new File([

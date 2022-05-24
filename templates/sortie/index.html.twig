@@ -30,20 +30,23 @@
             <td>{{ sortie.dateLimiteInscription ? sortie.dateLimiteInscription|date('d-m-Y') : '' }}</td>
             <td>{{ sortie.nbIscriptionsMax }}</td>
             <td>{{ sortie.etat.libelle }}</td>
-            <td>{{ sortie.organisateurs.prenom }}</td>
+            <td>
+                <a href="{{path('details_profil', {'id': sortie.organisateurs.id})}}" >
+                {{ sortie.organisateurs.prenom }}</a></td>
             <td>
             <a href="{{ path('details-sortie', {'id': sortie.id}) }}">Détails</a>
             {% if sortie.organisateurs.id == app.user.id %}
                 <a href="{{ path('editer-sortie', {'id': sortie.id}) }}">Modifier</a>
                 <a href="{{ path('annuler-sortie', {'id': sortie.id}) }}">Annuler</a>
             {% endif %}
-
-            {% if app.user in sortie.participants and sortie.etat.libelle == 'Ouverte'%}
-                 <a href="{{ path('inscription_desinscription', {'id': sortie.id, action: 'desinscription'}) }}">Se
+            {% if sortie.etat.libelle == 'Ouverte'%}
+                 {% if app.user in sortie.participants %}
+                     <a href="{{ path('inscription_desinscription', {'id': sortie.id, action: 'desinscription'}) }}">Se
                 désinscrire</a>
-            {% elseif (app.user != sortie.organisateurs and app.user not in sortie.participants) %}
+                 {% elseif (app.user != sortie.organisateurs and app.user not in sortie.participants) %}
                 <a href="{{ path('inscription_desinscription', {'id': sortie.id, action:'inscription'}) }}">S'inscrire</a>
             {% endif %}
+                 {% endif %}
 
 
 

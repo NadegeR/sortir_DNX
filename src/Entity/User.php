@@ -62,7 +62,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @ORM\Column(type="boolean")
      */
-    private $acitif;
+    private $actif;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -236,14 +236,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function isAcitif(): ?bool
+    public function isActif(): ?bool
     {
-        return $this->acitif;
+        return $this->actif;
     }
 
-    public function setAcitif(bool $acitif): self
+    public function setActif(bool $actif): self
     {
-        $this->acitif = $acitif;
+        $this->actif = $actif;
 
         return $this;
     }

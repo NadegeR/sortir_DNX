@@ -28,7 +28,7 @@ class UserFixtures extends Fixture
         $password = $this->passwordHasher->hashPassword($user1, 'qwerty');
         $user1->setPassword($password);
         $user1->setRoles(['ROLE_USER']);
-        $user1->setAcitif(true);
+        $user1->setActif(true);
         $user1->setAdministrateur(false);
         $manager->persist($user1);
 
@@ -39,7 +39,7 @@ class UserFixtures extends Fixture
         $password = $this->passwordHasher->hashPassword($user2, 'azerty');
         $user2->setPassword($password);
         $user2->setRoles(['ROLE_ADMIN']);
-        $user2->setAcitif(true);
+        $user2->setActif(true);
         $user2->setAdministrateur(true);
         $manager->persist($user2);
 
@@ -50,7 +50,7 @@ class UserFixtures extends Fixture
         $password = $this->passwordHasher->hashPassword($user3, 'qwerty');
         $user3->setPassword($password);
         $user3->setRoles(['ROLE_ORG']);
-        $user3->setAcitif(true);
+        $user3->setActif(true);
         $user3->setAdministrateur(false);
         $manager->persist($user3);
 
@@ -61,7 +61,7 @@ class UserFixtures extends Fixture
         $password = $this->passwordHasher->hashPassword($user4, 'qwerty');
         $user4->setPassword($password);
         $user4->setRoles(['ROLE_USER']);
-        $user4->setAcitif(true);
+        $user4->setActif(true);
         $user4->setAdministrateur(false);
         $manager->persist($user4);
 
