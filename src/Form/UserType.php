@@ -62,7 +62,7 @@ class UserType extends AbstractType
                 'class' => Campus::class,
                 'choice_label' => 'nom'
             ])
-            ->add('inscrit')
+
             ;
     }
 

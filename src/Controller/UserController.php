@@ -65,11 +65,11 @@ class UserController extends AbstractController implements PasswordUpgraderInter
      */
     public function edit(Request $request, User $user, UserRepository $userRepository, SluggerInterface $slugger): Response
     {
-        $profilForm = $this->createForm(UserType::class, $user);
-        $profilForm->handleRequest($request);
+        $form = $this->createForm(UserType::class, $user);
+        $form->handleRequest($request);
 
-        if ($profilForm->isSubmitted() && $profilForm->isValid()) {
-            $photoFile = $profilForm->get('photo')->getData();
+        if ($form->isSubmitted() && $form->isValid()) {
+            $photoFile = $form->get('photo')->getData();
             // prise en charge de l'image
             if ($photoFile) {
                 $photoName = pathinfo($photoFile->getClientOriginalName(), PATHINFO_FILENAME);
@@ -97,7 +97,7 @@ class UserController extends AbstractController implements PasswordUpgraderInter
 
         return $this->renderForm('user/edit.html.twig', [
             'user' => $user,
-            'profilform' => $profilForm,
+            'form' => $form,
         ]);
     }
 
