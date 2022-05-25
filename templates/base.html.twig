@@ -32,12 +32,11 @@
 
 <body>
 <header>
+    {%if app.user%}
     <div class="container">
-
         {{ include('inc/nav.html.twig')}}
-
     </div>
-
+    {%endif%}
 
     {# read and display all flash messages #}
     <div class="container">

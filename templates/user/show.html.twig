@@ -3,7 +3,8 @@
 {% block title %}Profil | {{ parent() }}{% endblock %}
 
 {% block body %}
-    <h1>Profil {{ user.nom}}</h1>
+
+    <h1>Profil {{ user.pseudo ?: user.prenom }}</h1>
 
     <div>
         {% if user.photo != null %}
