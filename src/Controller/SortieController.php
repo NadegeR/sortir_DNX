@@ -106,7 +106,7 @@ class SortieController extends AbstractController
     }
 
     /**
-     * @Route("org/{id}/edit", name="editer-sortie", methods={"GET", "POST"})
+     * @Route("/{id}/edit", name="editer-sortie", methods={"GET", "POST"})
      */
     public function edit(Request $request, Sortie $sortie, SortieRepository $sortieRepository, EtatRepository $etatRepository, VilleRepository $villeRepository): Response
     {
@@ -141,7 +141,7 @@ class SortieController extends AbstractController
         ]);
     }
     /**
-     * @Route("org/{id}", name="annuler-sortie", methods={"GET", "POST"})
+     * @Route("/{id}", name="annuler-sortie", methods={"GET", "POST"})
      */
     public function annuler(Request $request, Sortie $sortie, SortieRepository $sortieRepository, EtatRepository $etatRepository): Response
     {
@@ -166,7 +166,7 @@ class SortieController extends AbstractController
     }
 
     /**
-     * @Route("org/{id}", name="effacer-sortie", methods={"GET", "POST"})
+     * @Route("/{id}", name="effacer-sortie", methods={"POST"})
      */
     public function delete(Request $request, Sortie $sortie, SortieRepository $sortieRepository): Response
     {

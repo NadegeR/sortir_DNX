@@ -11,5 +11,5 @@
     {% if sortie.organisateurs.id == app.user.id %}
     <a href="{{ path('annuler-sortie', {'id': sortie.id}) }}"><button>Annuler la sortie</button></a>
     {% endif %}
-    {{ include('sortie/_delete_form.html.twig') }}
+
 {% endblock %}

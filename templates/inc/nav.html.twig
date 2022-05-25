@@ -1,9 +1,9 @@
 <nav class="navbar">
     <div class="entete">
-    <h1>
-        <img src="{{ asset('img/favicon.png') }}" alt="SortirDNX logo">
-        Sortir DNX !
-    </h1>
+    <a href="{{ path('liste-sorties') }}">
+        <h1><img src="{{ asset('img/favicon.png') }}" alt="SortirDNX logo">Sortir DNX !</h1>
+    </a>
+
     </div>
 
     {% if app.user %}

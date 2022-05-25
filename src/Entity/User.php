@@ -86,7 +86,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $isInscrit;
 
     /**
-     * @ORM\OneToMany(targetEntity=Sortie::class, mappedBy="organisateurs")
+     * @ORM\OneToMany(targetEntity=Sortie::class, mappedBy="organisateurs", cascade={"remove"})
      */
     private $organisateur;
 

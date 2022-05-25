@@ -45,7 +45,7 @@
                         {% if app.user in sortie.participants %}
                             <a href="{{ path('inscription_desinscription', {'id': sortie.id, action: 'desinscription'}) }}">Se
                                 désinscrire</a>
-                        {% elseif (app.user != sortie.organisateurs and app.user not in sortie.participants) %}
+                        {% elseif (app.user != sortie.organisateurs and app.user not in sortie.participants and sortie.participants | length < sortie.nbIscriptionsMax) %}
                             <a href="{{ path('inscription_desinscription', {'id': sortie.id, action:'inscription'}) }}">S'inscrire</a>
                         {% endif %}
                     {% endif %}
