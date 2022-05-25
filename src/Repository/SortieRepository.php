@@ -54,9 +54,10 @@ class SortieRepository extends ServiceEntityRepository
         }
 
         if ($filtre['dateDebut'] || $filtre['dateFin']) {
-            $dateDebut = $filtre['dateDebut'] ? date_format($filtre['dateDebut'], 'd-m-Y') : date('d-m-Y');
-            $dateFin = $filtre['dateFin'] ? date_format($filtre['dateFin'], 'd-m-Y') : date('d-m-Y');
-            $queryB->andWhere('sortie.dateHeureDebut BETWEEN :dateDebut and :dateFin')
+            $dateDebut = $filtre['dateDebut'] ? date_format($filtre['dateDebut'], 'Y-m-d') : date('Y-m-d');
+            $dateFin = $filtre['dateFin'] ? date_format($filtre['dateFin'], 'Y-m-d') : date('Y-m-d');
+            $queryB->andWhere('sortie.dateHeureDebut = :dateFin OR sortie.dateHeureDebut BETWEEN :dateDebut and :dateFin')
+//                ->andWhere('sortie.dateHeureDebut = :dateDebut')
                 ->setParameter('dateDebut', $dateDebut)
                 ->setParameter('dateFin', $dateFin);
         }

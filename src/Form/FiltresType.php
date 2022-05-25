@@ -32,18 +32,18 @@ class FiltresType extends AbstractType
         ])
 
         ->add('dateDebut', DateType::class, [
+            'label'=> 'Sorties prévues du  ',
             'widget' => 'single_text',
-            'format' => '(d-m-Y)',
             'required' => false,
-            'html5' => false,
+            'html5' => true,
             'attr' => ['placeholder' => 'jj/mm/aaaa']
         ])
 
         ->add('dateFin', DateType::class, [
+            'label'=> 'au',
             'widget' => 'single_text',
-            'format' => '(d-m-Y)',
             'required' => false,
-            'html5' => false,
+            'html5' => true,
             'attr' => ['placeholder' => 'jj/mm/aaaa']
         ] )
 
