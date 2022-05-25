@@ -63,19 +63,19 @@ class SortieRepository extends ServiceEntityRepository
 
         if ($filtre['organisateur']) {
             $queryB->andWhere('sortie.organisateurs = :organisateur')
-                ->setParameter('organisateur', $filtre['userID']);
+                ->setParameter('organisateur', $filtre['userId']);
         }
 
         if ($filtre['inscrit']) {
-            $queryB->andWhere(':userID MEMBER OF sortie.isInscrit')
-                ->setParameter('userID', $filtre['userID']);
+            $queryB->andWhere(':userId MEMBER OF sortie.participants')
+                ->setParameter('userId', $filtre['userId']);
         }
 
         if ($filtre['nonInscrit']) {
-            $queryB->andWhere(':userId NOT MEMBER OF sortie.isInscrit')
-                ->setParameter('userID', $filtre['userID'])
+            $queryB->andWhere(':userId NOT MEMBER OF sortie.participants')
+                ->setParameter('userId', $filtre['userId'])
                 ->andWhere('sortie.organisateurs != :organisateur')
-                ->setParameter('organisateur', $filtre['userID']);
+                ->setParameter('organisateur', $filtre['userId']);
         }
 
 //        if($filtre['passee']){

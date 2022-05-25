@@ -26,12 +26,13 @@ class SortieController extends AbstractController
      */
     public function index(Request $request, SortieRepository $sortieRepository): Response
     {
-        $user = $this->getUser();
+        $user = $this->getUser()->getId();
         $filtreForm = $this->createForm(FiltresType::class);
         $filtreForm->handleRequest($request);
 
         if ($filtreForm->isSubmitted() && $filtreForm->isValid()) {
             $filtre = $filtreForm->getData();
+            $filtre['userId']= $user;
             if(!empty(array_filter($filtre, function ($f){ return $f;}))){
                 $sorties = $sortieRepository->sortieParFiltres($filtre);
             } else {
