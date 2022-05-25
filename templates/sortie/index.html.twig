@@ -7,7 +7,7 @@
 {% block body %}
     {{ form_start(sortiesFiltreesForm) }}
     <button type="submit" value="Rechercher">Rechercher</button>
-    {{ form_end(sortiesFiltreesForm)}}
+    {{ form_end(sortiesFiltreesForm) }}
     <h1>Liste des Sorties</h1>
 
     <table class="table">
@@ -39,7 +39,9 @@
                     <a href="{{ path('details-sortie', {'id': sortie.id}) }}">Détails</a>
                     {% if sortie.organisateurs.id == app.user.id %}
                         <a href="{{ path('editer-sortie', {'id': sortie.id}) }}">Modifier</a>
-                        <a href="{{ path('annuler-sortie', {'id': sortie.id}) }}">Annuler</a>
+                        {% if sortie.etat.libelle != 'Annulée' %}
+                            <a href="{{ path('annuler-sortie', {'id': sortie.id}) }}">Annuler</a>
+                        {% endif %}
                     {% endif %}
                     {% if sortie.etat.libelle == 'Ouverte' %}
                         {% if app.user in sortie.participants %}

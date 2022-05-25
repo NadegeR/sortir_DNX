@@ -14,7 +14,8 @@ class AnnulationType extends AbstractType
     {
         $builder
             ->add('Motif', TextareaType::class, [
-                'attr' => ['placeholder'=> 'Veuillez saisir un motif d\'annulation'],
+                'label'=> 'Motif d\'annulation',
+
                 'required'=>false])
         ;
     }

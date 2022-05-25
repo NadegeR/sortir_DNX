@@ -1,2 +1,15 @@
-{{ form_start(form) }}
+{#{{ form_start(form) }}
 {{form_end((form))}}
+
+{{ form_start(form) }}
+        {{ form_label(form) }}
+        {{ form_widget(form) }}
+
+
+<a href="{{ path('annuler-sortie', { 'id': sortie.id }) }}">
+    <button name="annuler" value="annulee">Annuler la sortie</button>
+</a>
+<a href="{{ path('liste-sorties') }}">
+    <button>Retour</button>
+</a>
+{{ form_end(form) }}#}
