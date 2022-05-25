@@ -37,14 +37,14 @@
                 <td>{{ user.pseudo }}</td>
                 <td>{{ user.photo }}</td>
                 <td>
-            <button><a href="{{ path('details_profil', {'id': user.id}) }}">show</a></button>
+            <button><a href="{{ path('details_profil', {'id': user.id}) }}">Détails</a></button>
                     {% if app.user.id == user.id %}
-                        <button><a href="{{ path('editer_profil', {'id': user.id}) }}">edit</a></button>
+                        <button><a href="{{ path('editer_profil', {'id': user.id}) }}">Modifier</a></button>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="12">no records found</td>
+                <td colspan="12">Aucun utilisateurs enregistrés !!</td>
             </tr>
             {% endif %}
         {% endfor %}

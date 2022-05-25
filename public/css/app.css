@@ -3,6 +3,9 @@ html, body {
     margin: 0;
     font-family: Bahnschrift, sans-serif;
     font-size: 16px;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
 main{
@@ -30,39 +33,50 @@ a{
     color: black;
     cursor: pointer;
 }
-
-
+/*.navbar-item{
+    position: absolute;
+    right:0px;
+    gap: 20px;
+    flex-direction: row;
+}
 
 .navbar-menu{
-    border: 1px gray;
+    padding: 20px;
+    border: 25px gray;
     background-color: #999999;
 
 }
-.navbar-item{
-    padding: 0px 10px;
-    margin: auto;
-    list-style: none;
-    display: inline-block;
-    flex-direction: row;
-    justify-content: flex-end;
-    width: auto;
-    height: auto;
-    border-right: 0.5px solid transparent;
+*/
+.navbar-menu{
+    background-color: #999999;
+    position: absolute;
+    width: 100%;
 }
-.navbar-link{
-    display: flex;
-    padding: 0px 10px;
-    justify-content: flex-end;
+.navbar-item{
+    float: right;
+}
+.navbar-menu a{
+    margin-right: 10px;
+    padding: 15px 15px;
+    justify-content: right;
     align-items: center;
     text-decoration: none;
     color: black;
     cursor: pointer;
 
 }
+.navbar-menu a:hover{
+    font-size: 18px;
+    color:white;
+}
 
 .entete{
     padding: 1rem 4rem;
     text-align: justify;
+}
+
+.entete img{
+    margin-right: 15px;
 }
 
 footer{
