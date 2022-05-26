@@ -8,54 +8,45 @@ html, body {
     min-height: 100vh;
 }
 
-main{
+main {
     padding: 1rem 5rem;
     margin-left: 2rem;
     text-align: justify;
 }
-input, textarea, select{
+
+input, textarea, select {
     margin-bottom: 5rem;
 }
+
 input[type=checkbox] {
     vertical-align: middle;
     position: relative;
     bottom: 1px;
 }
 
-label{
+label {
     padding: 5px 5px;
     width: 17rem;
     display: inline-block;
 }
 
-a{
+a {
     text-decoration: none;
     color: black;
     cursor: pointer;
 }
-/*.navbar-item{
-    position: absolute;
-    right:0px;
-    gap: 20px;
-    flex-direction: row;
-}
 
-.navbar-menu{
-    padding: 20px;
-    border: 25px gray;
-    background-color: #999999;
-
-}
-*/
-.navbar-menu{
+.navbar-menu {
     background-color: #999999;
     position: absolute;
     width: 100%;
 }
-.navbar-item{
+
+.navbar-item {
     float: right;
 }
-.navbar-menu a{
+
+.navbar-menu a {
     margin-right: 10px;
     padding: 15px 15px;
     justify-content: right;
@@ -65,45 +56,79 @@ a{
     cursor: pointer;
 
 }
-.navbar-menu a:hover{
+
+.navbar-menu a:hover {
     font-size: 18px;
-    color:white;
+    color: white;
 }
 
-.entete{
+.entete {
     padding: 1rem 4rem;
     text-align: justify;
 }
 
-.entete img{
+.entete img {
     margin-right: 15px;
 }
 
-footer{
-    bottom:0;
-    width:100%;
-    padding-top:50px;
-    height:50px;
+footer {
+    bottom: 0;
+    width: 100%;
+    padding-top: 50px;
+    height: 50px;
     text-align: center;
 }
-.table{
+
+.liste {
     padding: 1px 2px;
-    text-align: center;
     border: 1px #999999;
     border-radius: 5%;
+    margin: auto;
+    overflow: auto;
+    width: 80%;
+    height: 300px;
+    border-collapse: collapse;
+    table-layout: auto;
+    text-align: left;
 }
-th{
+.liste a:hover{
+    color: #999999;
+}
+
+.liste th {
+    text-align: left;
     height: 10px;
+    overflow: auto;
+    background-color: #999999;
+
 }
-td{
-    padding: 1px 25px;
-    text-align: center;
-    width: auto;
+
+.liste td {
+    text-align: left;
+    overflow: auto;
 }
-tr{
+
+.liste tr {
     padding: 2px 2px;
     width: content-box;
 }
+
+.avatar img {
+    max-height: 250px;
+    margin-right: 0.6rem;
+}
+
+caption{
+    padding-top: 25px;
+    text-align: left;
+}
+.recherches{
+    margin: auto;
+}
+.nouvelleSortie{
+    float: left;
+}
+
 
 
 
