@@ -55,7 +55,6 @@ a {
     text-decoration: none;
     color: black;
     cursor: pointer;
-
 }
 
 .navbar-menu a:hover {
@@ -92,7 +91,8 @@ a {
     table-layout: auto;
     text-align: left;
 }
-.liste a:hover{
+
+.liste a:hover {
     color: #999999;
 }
 
@@ -101,7 +101,6 @@ a {
     height: 10px;
     overflow: auto;
     background-color: #999999;
-
 }
 
 .liste td {
@@ -119,17 +118,38 @@ a {
     margin-right: 0.6rem;
 }
 
-caption{
+caption {
     padding-top: 25px;
     text-align: left;
 }
-.recherches{
+
+.recherches {
     margin: auto;
 }
-.nouvelleSortie{
+
+.nouvelleSortie {
     float: left;
 }
 
+.inscrits {
+    overflow: auto;
+    border-collapse: collapse;
+    margin-top: 25px;
+}
 
+.inscrits th {
+    border: #999999 1px solid;
+    padding: 10px;
+}
 
+.inscrits td {
+    border: #999999 1px solid;
+    padding: 5px;
+}
+
+button {
+    padding: 10px;
+    border-radius: 15px;
+    margin: 10px 10px 0 0 !important;
+}
 

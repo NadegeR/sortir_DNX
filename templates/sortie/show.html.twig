@@ -1,53 +1,53 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Sortie |{{parent()}}{% endblock %}
+{% block title %}Sortie |{{ parent() }}{% endblock %}
 
 {% block body %}
-    <h1>Détails de la Sortie {{sortie.nom}}</h1>
+    <h1>Détails de la Sortie {{ sortie.nom }}</h1>
 
     <table class="tableFiltre">
         <tbody>
-            <tr>
-                <th>Nom</th>
-                <td>{{ sortie.nom }}</td>
-            </tr>
-            <tr>
-                <th>DateHeureDebut</th>
-                <td>{{ sortie.dateHeureDebut ? sortie.dateHeureDebut|date('d-m-Y H:i') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Duree</th>
-                <td>{{ sortie.duree ? sortie.duree : '' }} minutes</td>
-            </tr>
-            <tr>
-                <th>DateLimiteInscription</th>
-                <td>{{ sortie.dateLimiteInscription ? sortie.dateLimiteInscription|date('d-m-Y H:i') : '' }}</td>
-            </tr>
-            <tr>
-                <th>NbIscriptionsMax</th>
-                <td>{{ sortie.nbIscriptionsMax }}</td>
-            </tr>
-            <tr>
-                <th>InfosSortie</th>
-                <td>{{ sortie.infosSortie }}</td>
-            </tr>
-            <tr>
-                <th>Campus</th>
-                <td>{{ sortie.siteOrganisateur.nom }}</td>
-            </tr>
-            <tr>
-                <th>Lieu</th>
-                <td>{{ sortie.lieu.nom }}</td>
-            </tr>
-            <tr>
-                <th>Rue</th>
-                <td>{{ sortie.lieu.rue }}</td>
-            </tr>
-            <tr>
-                <th>Code Postal</th>
-                <td>{{ sortie.lieu.ville.codePostal }}</td>
-            </tr>
-            {% if sortie.lieu.latitude and sortie.lieu.longitude is defined %}
+        <tr>
+            <th>Nom</th>
+            <td>{{ sortie.nom }}</td>
+        </tr>
+        <tr>
+            <th>DateHeureDebut</th>
+            <td>{{ sortie.dateHeureDebut ? sortie.dateHeureDebut|date('d-m-Y H:i') : '' }}</td>
+        </tr>
+        <tr>
+            <th>Duree</th>
+            <td>{{ sortie.duree ? sortie.duree : '' }} minutes</td>
+        </tr>
+        <tr>
+            <th>DateLimiteInscription</th>
+            <td>{{ sortie.dateLimiteInscription ? sortie.dateLimiteInscription|date('d-m-Y H:i') : '' }}</td>
+        </tr>
+        <tr>
+            <th>NbIscriptionsMax</th>
+            <td>{{ sortie.nbIscriptionsMax }}</td>
+        </tr>
+        <tr>
+            <th>InfosSortie</th>
+            <td>{{ sortie.infosSortie }}</td>
+        </tr>
+        <tr>
+            <th>Campus</th>
+            <td>{{ sortie.siteOrganisateur.nom }}</td>
+        </tr>
+        <tr>
+            <th>Lieu</th>
+            <td>{{ sortie.lieu.nom }}</td>
+        </tr>
+        <tr>
+            <th>Rue</th>
+            <td>{{ sortie.lieu.rue }}</td>
+        </tr>
+        <tr>
+            <th>Code Postal</th>
+            <td>{{ sortie.lieu.ville.codePostal }}</td>
+        </tr>
+        {% if sortie.lieu.latitude and sortie.lieu.longitude is defined %}
             <tr>
                 <th>latitude</th>
                 <td>{{ sortie.lieu.latitude }}</td>
@@ -60,10 +60,32 @@
         </tbody>
     </table>
 
-    <a href="{{ path('liste-sorties') }}"><button>Retour à la liste</button></a>
+    <a href="{{ path('liste-sorties') }}">
+        <button>Retour à la liste</button>
+    </a>
     {% if app.user == sortie.organisateurs %}
-    <a href="{{ path('editer-sortie', {'id': sortie.id}) }}"><button>Modifier</button></a>
+        <a href="{{ path('editer-sortie', {'id': sortie.id}) }}">
+            <button>Modifier</button>
+        </a>
 
     {% endif %}
+
+    <table class="inscrits">
+        <caption><h3>Liste des inscrits</h3></caption>
+        {% for participants in sortie.participants %}
+            <tr>
+                <th>Pseudo</th>
+                <th>Nom</th>
+            </tr>
+            <tr>
+                <td>{{ participants.pseudo }}</td>
+                <td>{{ participants.prenom }} {{ participants.nom }}  </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">Aucun inscrit à la sortie </td>
+            </tr>
+        {% endfor %}
+    </table>
 
 {% endblock %}
