@@ -56,7 +56,7 @@ class UserType extends AbstractType
             ->add('telephone')
 
             ->add('pseudo')
-            ->add('photo', FileType::class, ['label' => 'Photo de profil (.jpg et.png)', 'required'=>false, 'mapped' => false,
+            ->add('photo', FileType::class, ['label' => 'Photo de profil (.jpg et .png)', 'required'=>false, 'mapped' => false,
                 'constraints' => [new File([
                     'maxSize' => '1024k',
                     'mimeTypes' => [
@@ -64,7 +64,7 @@ class UserType extends AbstractType
                         'image/jpeg',
                         'image/gif',
                     ],
-                    'mimeTypesMessage' => 'Please upload a valid image .jpg .png .gif',
+                    'mimeTypesMessage' => 'Choisir une image de type .jpeg .jpg .png .gif',
                 ])
                 ],
             ])

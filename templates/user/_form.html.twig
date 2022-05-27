@@ -4,9 +4,9 @@
 <tr>
     <td rowspan="10"><div class="avatar">
             {% if user.photo != null %}
-                <img src="{{ asset('uploads/photos/' ~ user.photo)}}">
+                <img src="{{ asset('uploads/photos/' ~ user.photo)}}" alt="photo{{user.prenom}}" title="photo | {{user.prenom}}">
             {% else%}
-                <img src="{{ asset('uploads/photos/chien-rire.gif')}}">
+                <img src="{{ asset('uploads/photos/chien-rire.gif')}}" alt="photo_avatar" title="photo_avatar">
             {% endif %}
         </div></td>
     <th>{{ form_label(form.pseudo) }}</th>

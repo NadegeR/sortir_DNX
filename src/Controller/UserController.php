@@ -29,27 +29,6 @@ class UserController extends AbstractController implements PasswordUpgraderInter
             'users' => $userRepository->findAll(),
         ]);
     }
-//    /**
-//     * @Route("/admin/new", name="admin_new_user", methods={"GET", "POST"})
-//     */
-//    public function new(Request $request, UserRepository $userRepository, UserPasswordEncoderInterface $passwordEncoder): Response
-//    {
-//        $user = new User();
-//        $form = $this->createForm(UserType::class, $user);
-//        $form->handleRequest($request);
-//
-//        if ($form->isSubmitted() && $form->isValid()) {
-//            $userRepository->add($user, true);
-//
-//            return $this->redirectToRoute('admin_liste_users', [], Response::HTTP_SEE_OTHER);
-//        }
-//
-//        return $this->renderForm('user/new.html.twig', [
-//            'user' => $user,
-//            'form' => $form,
-//        ]);
-//    }
-
 
     /**
      * @Route("/profil/{id}", name="details_profil", methods={"GET"})

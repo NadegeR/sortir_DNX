@@ -40,13 +40,14 @@
             <button><a href="{{ path('details_profil', {'id': user.id}) }}">Détails</a></button>
                     {% if app.user.id == user.id %}
                         <button><a href="{{ path('editer_profil', {'id': user.id}) }}">Modifier</a></button>
+                    {% endif %}
                 </td>
             </tr>
         {% else %}
             <tr>
                 <td colspan="12">Aucun utilisateurs enregistrés !!</td>
             </tr>
-            {% endif %}
+
         {% endfor %}
         </tbody>
     </table>

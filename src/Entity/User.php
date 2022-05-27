@@ -43,18 +43,19 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $password;
 
     /**
+     * @Assert\NotBlank(message="Entrer votre nom")
      * @ORM\Column(type="string", length=70)
      */
     private $nom;
 
     /**
-     * @Assert\NotBlank(message="Entrer votre nom")
+     * @Assert\NotBlank(message="Entrer votre prénom")
      * @ORM\Column(type="string", length=70)
      */
     private $prenom;
 
     /**
-     * @Assert\NotBlank(message="Entrer votre prénom")
+     *
      * @ORM\Column(type="string", length=12, nullable=true)
      */
     private $telephone;
