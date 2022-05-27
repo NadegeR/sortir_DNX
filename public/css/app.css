@@ -12,6 +12,7 @@ main {
     padding: 1rem 5rem;
     margin-left: 2rem;
     text-align: justify;
+    flex: 1;
 }
 
 input, textarea, select {

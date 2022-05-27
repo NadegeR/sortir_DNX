@@ -5,13 +5,6 @@
 {% block body %}
     <h1>Modifier le profil</h1>
 
-    <div class="avatar">
-        {% if user.photo != null %}
-            <img src="{{ asset('uploads/photos/' ~ user.photo)}}">
-        {% else%}
-            <img src="{{ asset('uploads/photos/chien-rire.gif')}}">
-        {% endif %}
-    </div>
     {{ include('user/_form.html.twig', {'button_label': 'Enregistrer'}) }}
     {% if is_granted("ROLE_ADMIN") %}
     <button><a href="{{ path('admin_liste_users') }}">Retour à la liste des utilisateurs</a></button>

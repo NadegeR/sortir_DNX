@@ -162,7 +162,7 @@ class SortieFixtures extends Fixture
         $user3->setEmail('davidi@exemple.com');
         $password = $this->passwordHasher->hashPassword($user3, 'qwerty');
         $user3->setPassword($password);
-        $user3->setRoles(['ROLE_ORG']);
+        $user3->setRoles(['ROLE_USER']);
         $user3->setActif(true);
         $user3->setAdministrateur(false);
         $user3->setCampus($campus2);

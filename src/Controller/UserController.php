@@ -103,6 +103,7 @@ class UserController extends AbstractController implements PasswordUpgraderInter
                 $user->setPhoto($newFilename);
             }
             $userRepository->add($user, true);
+            $this->addFlash('success','Votre profil a été modifié !');
 
             return $this->redirectToRoute('details_profil', ['id'=>$user->getId()], Response::HTTP_SEE_OTHER);
         }

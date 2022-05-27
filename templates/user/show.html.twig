@@ -6,20 +6,24 @@
 
     <h1>Profil {{ user.pseudo ?: user.prenom }}</h1>
 
-    <div class="avatar">
-        {% if user.photo != null %}
-        <img src="{{ asset('uploads/photos/' ~ user.photo)}}">
-        {% else%}
-        <img src="{{ asset('uploads/photos/chien-rire.gif')}}">
-        {% endif %}
-    </div>
+
 
 
     <table class="table">
         <tbody>
         <tr>
+            <td rowspan="5">
+                <div class="avatar">
+                    {% if user.photo != null %}
+                        <img src="{{ asset('uploads/photos/' ~ user.photo)}}">
+                    {% else%}
+                        <img src="{{ asset('uploads/photos/chien-rire.gif')}}">
+                    {% endif %}
+                </div>
+            </td>
             <th>Pseudo</th>
             <td>{{ user.pseudo }}</td>
+
         </tr>
         <tr>
             <th>Nom</th>

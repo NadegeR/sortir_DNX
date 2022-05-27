@@ -1,40 +1,49 @@
 {{ form_start(form) }}
+<table>
+    <tbody>
+<tr>
+    <td rowspan="10"><div class="avatar">
+            {% if user.photo != null %}
+                <img src="{{ asset('uploads/photos/' ~ user.photo)}}">
+            {% else%}
+                <img src="{{ asset('uploads/photos/chien-rire.gif')}}">
+            {% endif %}
+        </div></td>
+    <th>{{ form_label(form.pseudo) }}</th>
+    <td>{{ form_widget(form.pseudo) }}</td>
+</tr>
+<tr>
+    <th>{{ form_label(form.nom) }}</th>
+    <td>{{ form_widget(form.nom) }}</td>
+</tr>
+<tr>
+    <th>{{ form_label(form.prenom) }}</th>
+    <td>{{ form_widget(form.prenom) }}</td>
+</tr>
+<tr>
+    <th>{{ form_label(form.email) }}</th>
+    <td>{{ form_widget(form.email) }}</td>
+</tr>
+<tr>
+    <th>{{ form_label(form.telephone) }}</th>
+    <td>{{ form_widget(form.telephone) }}</td>
+</tr>
+<tr>
 
-<div>
-    {{ form_label(form.pseudo) }}
-    {{ form_widget(form.pseudo) }}
-</div>
-<div>
-    {{ form_label(form.nom) }}
-    {{ form_widget(form.nom) }}
-</div>
-<div>
-    {{ form_label(form.prenom) }}
-    {{ form_widget(form.prenom) }}
-</div>
-<div>
-    {{ form_label(form.email) }}
-    {{ form_widget(form.email) }}
-</div>
-<div>
-    {{ form_label(form.telephone) }}
-    {{ form_widget(form.telephone) }}
-</div>
-<div>
-    {{ form_label(form.plainPassword)}}
-    {{ form_widget(form.plainPassword)}}
+    <td colspan="2">{{ form_widget(form.plainPassword)}}</td>
 
-</div>
-<div>
-    {{ form_label(form.campus) }}
-    {{ form_widget(form.campus) }}
-</div>
+</tr>
+<tr>
+    <th>{{ form_label(form.campus) }}</th>
+    <td>{{ form_widget(form.campus) }}</td>
+</tr>
 
-<div>
-    {{ form_label(form.photo) }}
-    {{ form_widget(form.photo) }}
-</div>
-
+<tr>
+    <th>{{ form_label(form.photo) }}</th>
+    <td>{{ form_widget(form.photo) }}</td>
+</tr>
+    </tbody>
+</table>
 
     <button class="btn">{{ button_label|default('Save') }}</button>
 {{ form_end(form) }}
