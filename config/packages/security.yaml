@@ -43,7 +43,7 @@ security:
          - { path: ^/register, roles: ROLE_ADMIN }
          - { path: ^/user, roles: ROLE_USER }
          - { path: ^/sortie, roles: ROLE_USER }
-        # - { path: ^/admin, roles: ROLE_ORG }
+
 
 when@test:
     security:

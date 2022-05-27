@@ -12,23 +12,23 @@
             <td>{{ sortie.nom }}</td>
         </tr>
         <tr>
-            <th>DateHeureDebut</th>
+            <th>Date et heure de la sortie</th>
             <td>{{ sortie.dateHeureDebut ? sortie.dateHeureDebut|date('d-m-Y H:i') : '' }}</td>
         </tr>
         <tr>
-            <th>Duree</th>
+            <th>Durée</th>
             <td>{{ sortie.duree ? sortie.duree : '' }} minutes</td>
         </tr>
         <tr>
-            <th>DateLimiteInscription</th>
+            <th>Date limite d'inscription</th>
             <td>{{ sortie.dateLimiteInscription ? sortie.dateLimiteInscription|date('d-m-Y H:i') : '' }}</td>
         </tr>
         <tr>
-            <th>NbIscriptionsMax</th>
+            <th>Nombres de places</th>
             <td>{{ sortie.nbIscriptionsMax }}</td>
         </tr>
         <tr>
-            <th>InfosSortie</th>
+            <th>description</th>
             <td>{{ sortie.infosSortie }}</td>
         </tr>
         <tr>
@@ -72,11 +72,12 @@
 
     <table class="inscrits">
         <caption><h3>Liste des inscrits</h3></caption>
-        {% for participants in sortie.participants %}
+
             <tr>
                 <th>Pseudo</th>
                 <th>Nom</th>
             </tr>
+        {% for participants in sortie.participants %}
             <tr>
                 <td>{{ participants.pseudo }}</td>
                 <td>{{ participants.prenom }} {{ participants.nom }}  </td>
